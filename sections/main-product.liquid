@@ -127,7 +127,7 @@
     if detail_eye != blank or detail_bridge != blank or detail_temple != blank or detail_frame_color != blank or detail_lens_color != blank
       assign has_variant_details = true
     endif
-    if has_variant_details == false and details_blocks.size > 0 and product.description contains '<table'
+    if has_variant_details == false and details_blocks.size > 0 and product.description contains '<table' and product.description contains 'Eye:' and product.description contains 'Bridge:'
       assign description_parts = product.description | split: '<table'
       assign description_intro = description_parts | first
       assign legacy_description_details = product.description | remove_first: description_intro
