@@ -206,7 +206,7 @@
         {%- endfor -%}
       </div>
 
-      {%- if paginate.pages > 1 -%}
+      {%- if paginate.pages > 1 and collection.handle != 'all' -%}
         {% render 'pagination', paginate: paginate, anchor: '' %}
       {%- endif -%}
     {%- endif -%}
