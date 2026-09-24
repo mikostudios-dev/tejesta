@@ -101,6 +101,16 @@
     assign variant_media_items = blank
     assign variant_media_item = blank
     assign has_variant_media = false
+    assign has_product_media = false
+    assign detail_eye = current_variant.metafields.custom.eye.value
+    assign detail_bridge = current_variant.metafields.custom.bridge.value
+    assign detail_temple = current_variant.metafields.custom.temple.value
+    assign detail_frame_color = current_variant.metafields.custom.frame_color.value
+    assign detail_lens_color = current_variant.metafields.custom.lens_color.value
+    assign has_variant_details = false
+    assign description_intro = product.description
+    assign legacy_description_details = blank
+    assign details_blocks = section.blocks | where: 'type', 'tejesta_variant_details'
 
     if variant_media_metafield.list?
       assign variant_media_items = variant_media_metafield.value
@@ -111,16 +121,27 @@
     if current_variant.featured_media != blank or variant_media_items != blank or variant_media_item != blank
       assign has_variant_media = true
     endif
+    if product.media.size > 0
+      assign has_product_media = true
+    endif
+    if detail_eye != blank or detail_bridge != blank or detail_temple != blank or detail_frame_color != blank or detail_lens_color != blank
+      assign has_variant_details = true
+    endif
+    if has_variant_details == false and details_blocks.size > 0 and product.description contains '<table'
+      assign description_parts = product.description | split: '<table'
+      assign description_intro = description_parts | first
+      assign legacy_description_details = product.description | remove_first: description_intro
+    endif
   -%}
   <div class="page-width">
-    <div class="product product--tejesta-pdp product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if has_variant_media %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--tejesta-pdp product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if has_variant_media or has_product_media %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery',
           variant_images: variant_images,
           variant_media_items: variant_media_items,
           variant_media_item: variant_media_item,
           current_variant: current_variant,
-          use_variant_scoped_media: true
+          use_variant_scoped_media: has_variant_media
         %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -260,9 +281,9 @@
                   {%- endif -%}
                 </p>
               {%- when 'description' -%}
-                {%- if product.description != blank -%}
+                {%- if description_intro != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                    {{ product.description }}
+                    {{ description_intro }}
                   </div>
                 {%- endif -%}
                 <div class="tejesta-product-rule tejesta-product-rule--content" aria-hidden="true"></div>
@@ -297,20 +318,9 @@
                   </details>
                 </div>
               {%- when 'tejesta_variant_details' -%}
-                {%- liquid
-                  assign detail_eye = current_variant.metafields.custom.eye.value
-                  assign detail_bridge = current_variant.metafields.custom.bridge.value
-                  assign detail_temple = current_variant.metafields.custom.temple.value
-                  assign detail_frame_color = current_variant.metafields.custom.frame_color.value
-                  assign detail_lens_color = current_variant.metafields.custom.lens_color.value
-                  assign has_variant_details = false
-                  if detail_eye != blank or detail_bridge != blank or detail_temple != blank or detail_frame_color != blank or detail_lens_color != blank
-                    assign has_variant_details = true
-                  endif
-                -%}
                 <div
                   id="TejestaVariantDetails-{{ section.id }}"
-                  class="product__accordion accordion quick-add-hidden{% unless has_variant_details %} hidden{% endunless %}"
+                  class="product__accordion accordion quick-add-hidden{% if has_variant_details == false and legacy_description_details == blank %} hidden{% endif %}"
                   {{ block.shopify_attributes }}
                 >
                   <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -322,7 +332,7 @@
                       </div>
                     </summary>
                     <div
-                      class="accordion__content tejesta-product-details"
+                      class="accordion__content tejesta-product-details{% if has_variant_details == false %} rte tejesta-product-details--legacy{% endif %}"
                       id="ProductAccordion-{{ block.id }}-{{ section.id }}"
                     >
                       {%- if detail_eye != blank or detail_bridge != blank or detail_temple != blank -%}
@@ -352,6 +362,9 @@
                             <dd>{{ detail_lens_color | escape }}</dd>
                           {%- endif -%}
                         </dl>
+                      {%- endif -%}
+                      {%- if has_variant_details == false and legacy_description_details != blank -%}
+                        {{ legacy_description_details }}
                       {%- endif -%}
                     </div>
                   </details>
@@ -821,7 +834,7 @@
       variant_media_items: variant_media_items,
       variant_media_item: variant_media_item,
       current_variant: current_variant,
-      use_variant_scoped_media: true
+      use_variant_scoped_media: has_variant_media
     %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
