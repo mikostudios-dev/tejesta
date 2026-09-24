@@ -1,7 +1,8 @@
 {{ 'tejesta-collection.css' | asset_url | stylesheet_tag }}
 {{ 'tejesta-collection-editorial.css' | asset_url | stylesheet_tag }}
+{{ 'tejesta-family-thumbnails.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'tejesta-collection-filters.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'tejesta-collection-editorial.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'tejesta-family-thumbnails.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   #TejestaCollectionEditorial-{{ section.id }} {
@@ -68,17 +69,11 @@
               assign selected_image = product.featured_media.preview_image
             endif
 
-            assign selected_colorway = selected_variant.option1 | default: selected_variant.title
-            if selected_colorway == 'Default Title'
-              assign selected_colorway = ''
-            endif
+            assign selected_colorway = product.metafields.custom.frame_color.value | default: product.metafields.custom.frame_color
 
             assign collection_description = product.metafields.custom.collection_description.value | default: product.description
 
             assign selected_url = product.url
-            if selected_variant
-              assign selected_url = product.url | append: '?variant=' | append: selected_variant.id
-            endif
 
             assign editorial_position = forloop.index0 | modulo: 2
           -%}
@@ -137,66 +132,7 @@
               </a>
             </div>
 
-            {%- if product.variants_count > 1 -%}
-              <div
-                class="tejesta-editorial-product__colorways{% if available_variant_count <= 6 %} tejesta-editorial-product__colorways--single-row{% endif %}"
-                aria-label="{{ product.title | escape }} colorways"
-              >
-                {%- for variant in product.variants -%}
-                  {%- if variant.inventory_management != 'shopify' or variant.inventory_quantity > 0 -%}
-                  {%- liquid
-                    assign variant_image = variant.featured_media.preview_image
-                    if variant_image == blank
-                      assign variant_image = variant.image
-                    endif
-
-                    assign variant_label = variant.option1 | default: variant.title
-                    assign variant_alt = product.title | append: ' - ' | append: variant_label
-                    assign variant_label_downcase = variant_label | downcase
-
-                    if variant_image == blank
-                      for media in product.media
-                        assign media_alt_downcase = media.alt | downcase
-                        if media_alt_downcase contains variant_label_downcase
-                          assign variant_image = media.preview_image
-                          break
-                        endif
-                      endfor
-                    endif
-                  -%}
-
-                  <button
-                    type="button"
-                    class="tejesta-editorial-product__colorway-button{% if variant.id == selected_variant.id %} is-active{% endif %}"
-                    data-tejesta-editorial-variant
-                    data-variant-url="{{ product.url }}?variant={{ variant.id }}"
-                    data-variant-label="{{ variant_label | escape }}"
-                    data-variant-alt="{{ variant_alt | escape }}"
-                    {% if variant_image != blank %}
-                      data-variant-image="{{ variant_image | image_url: width: 1800 }}"
-                    {% endif %}
-                    aria-label="{{ variant_alt | escape }}"
-                    aria-pressed="{% if variant.id == selected_variant.id %}true{% else %}false{% endif %}"
-                  >
-                    {%- if variant_image != blank -%}
-                      {{
-                        variant_image
-                        | image_url: width: 180
-                        | image_tag:
-                          widths: '90, 120, 180',
-                          sizes: '72px',
-                          loading: 'lazy',
-                          class: 'tejesta-editorial-product__colorway-image',
-                          alt: variant_alt
-                      }}
-                    {%- else -%}
-                      <span class="tejesta-editorial-product__colorway-fallback" aria-hidden="true"></span>
-                    {%- endif -%}
-                  </button>
-                  {%- endif -%}
-                {%- endfor -%}
-              </div>
-            {%- endif -%}
+            {% render 'tejesta-family-thumbnails', product: product, placement: 'editorial' %}
 
             <div class="tejesta-editorial-product__divider" aria-hidden="true">
               <img
@@ -285,3 +221,4 @@
   ]
 }
 {% endschema %}
+
