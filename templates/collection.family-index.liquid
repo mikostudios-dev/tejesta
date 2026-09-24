@@ -14,7 +14,7 @@
           {%- break -%}
         {%- endif -%}
       {%- endfor -%}
-      {"id":{{ product.id | json }},"key":{{ family_style_key | downcase | strip | json }},"title":{{ product.title | json }},"label":{{ family_frame_color | json }},"url":{{ product.url | json }},"inStock":{{ family_product_in_stock | json }},"image":{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 240 | json }}{% else %}null{% endif %}}
+      {"id":{{ product.id | json }},"key":{{ family_style_key | downcase | strip | json }},"title":{{ product.title | json }},"label":{{ family_frame_color | json }},"colorway":{{ product.metafields.custom.colorway_label.value | json }},"url":{{ product.url | json }},"inStock":{{ family_product_in_stock | json }},"image":{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 240 | json }}{% else %}null{% endif %},"largeImage":{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 1800 | json }}{% else %}null{% endif %}}
       {%- assign emitted_family_product_count = emitted_family_product_count | plus: 1 -%}
     {%- endif -%}
   {%- endfor -%}
