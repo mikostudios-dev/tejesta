@@ -116,7 +116,20 @@
         }
       }
 
-      visibleFamily.forEach((item) => this.appendProductLink(item, String(item.id) === currentId));
+      if (this.dataset.familyPlacement === 'editorial') {
+        visibleFamily = [...visibleFamily];
+        for (let index = visibleFamily.length - 1; index > 0; index -= 1) {
+          const randomIndex = Math.floor(Math.random() * (index + 1));
+          [visibleFamily[index], visibleFamily[randomIndex]] = [visibleFamily[randomIndex], visibleFamily[index]];
+        }
+      }
+
+      const links = visibleFamily.map((item) => this.appendProductLink(item, String(item.id) === currentId));
+
+      if (editorialCard && !editorialCard.hasAttribute('data-tejesta-non-primary')) {
+        const initialIndex = visibleFamily.findIndex((item) => item.largeImage);
+        if (initialIndex >= 0) this.activateEditorialProduct(visibleFamily[initialIndex], links[initialIndex]);
+      }
 
       if (this.dataset.familyPlacement === 'card' && family.length > visibleFamily.length) {
         const overflow = document.createElement('span');
@@ -245,6 +258,7 @@
       }
 
       this.append(link);
+      return link;
     }
   }
 
