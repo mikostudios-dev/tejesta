@@ -22,7 +22,13 @@
   id="TejestaCollectionEditorial-{{ section.id }}"
   class="tejesta-editorial gradient color-{{ section.settings.color_scheme }}"
 >
-  {%- paginate collection.products by section.settings.products_per_page -%}
+  {%- liquid
+    assign editorial_page_size = section.settings.products_per_page
+    if collection.handle == 'all'
+      assign editorial_page_size = 250
+    endif
+  -%}
+  {%- paginate collection.products by editorial_page_size -%}
     {%- if section.settings.show_filters -%}
       <aside
         aria-label="Collection filters"
@@ -48,6 +54,8 @@
         class="tejesta-editorial__products"
         data-id="{{ section.id }}"
       >
+        {%- assign seen_style_keys = '|' -%}
+        {%- assign visible_style_count = 0 -%}
         {%- for product in collection.products -%}
           {%- liquid
             assign selected_variant = null
@@ -69,16 +77,65 @@
               assign selected_image = product.featured_media.preview_image
             endif
 
-            assign selected_colorway = product.metafields.custom.frame_color.value | default: product.metafields.custom.frame_color
+            assign style_key = product.metafields.custom.style_key.value | default: product.metafields.custom.style_key
+            assign style_marker = '|' | append: style_key | append: '|'
+            assign show_style = true
+            if style_key != blank and seen_style_keys contains style_marker
+              assign show_style = false
+            endif
+
+            assign style_title = product.metafields.custom.style_title.value
+            if style_title == blank and style_key != blank
+              assign style_title = ''
+              assign style_words = style_key | replace: '-', ' ' | split: ' '
+              for style_word in style_words
+                assign display_word = style_word | capitalize
+                if style_word == 'rx' or style_word == 'jpg'
+                  assign display_word = style_word | upcase
+                elsif style_word == 'x'
+                  assign display_word = 'x'
+                endif
+                assign style_title = style_title | append: ' ' | append: display_word
+              endfor
+              assign style_title = style_title | strip
+              if style_key == 'annie-o' or style_key == 'annie-o-rx'
+                assign style_title = style_title | replace: 'Annie O', 'Annie-O'
+              elsif style_key == 'colored-lenses'
+                assign style_title = product.title
+              endif
+            endif
+            if style_title == blank
+              assign style_title = product.title
+            endif
+
+            assign selected_colorway = product.metafields.custom.colorway_label.value
+            if selected_colorway == blank and style_key != blank
+              assign colorway_source_title = product.title
+              assign colorway_style_title = style_title
+              if style_key contains '-rx'
+                assign colorway_source_title = colorway_source_title | remove: ' RX' | remove: ' Rx'
+                assign colorway_style_title = colorway_style_title | remove: ' RX'
+              endif
+              assign title_prefix = colorway_source_title | slice: 0, colorway_style_title.size
+              if title_prefix == colorway_style_title
+                assign selected_colorway = colorway_source_title | remove_first: colorway_style_title | strip
+              endif
+            endif
 
             assign collection_description = product.metafields.custom.collection_description.value | default: product.description
 
             assign selected_url = product.url
 
-            assign editorial_position = forloop.index0 | modulo: 2
+            assign editorial_position = visible_style_count | modulo: 2
           -%}
 
-          {%- if selected_variant -%}
+          {%- if selected_variant and show_style -%}
+          {%- liquid
+            assign visible_style_count = visible_style_count | plus: 1
+            if style_key != blank
+              assign seen_style_keys = seen_style_keys | append: style_marker
+            endif
+          -%}
           <tejesta-editorial-product
             role="article"
             class="tejesta-editorial-product{% if editorial_position == 1 %} tejesta-editorial-product--reverse{% endif %}{% if forloop.last %} tejesta-editorial-product--last-visible{% endif %}"
@@ -89,7 +146,7 @@
             <div class="tejesta-editorial-product__content">
               <h2 class="tejesta-editorial-product__title">
                 <a href="{{ selected_url }}" data-editorial-product-link>
-                  {{ product.title | escape }}
+                  {{ style_title | escape }}
                 </a>
               </h2>
 
@@ -221,4 +278,3 @@
   ]
 }
 {% endschema %}
-
