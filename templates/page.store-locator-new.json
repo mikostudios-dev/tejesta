@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-store-locator-tejesta",
+      "settings": {
+        "heading": "Find a Retailer",
+        "widget_tag": "u9382",
+        "search_placeholder": "Type a postcode or address..."
+      }
+    },
+    "footer_divider": {
+      "type": "tejesta-line-art-divider",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "divider_width": 90,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "footer_divider"
+  ]
+}
