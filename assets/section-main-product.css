@@ -1730,6 +1730,56 @@ a.product__text {
   }
 }
 
+.product--tejesta-pdp .tejesta-product-details--legacy {
+  display: block;
+  padding-top: 1.1rem;
+}
+
+.product--tejesta-pdp .tejesta-product-details--legacy table {
+  width: 100%;
+  table-layout: fixed;
+  margin: 0;
+  box-shadow: none;
+}
+
+.product--tejesta-pdp .tejesta-product-details--legacy td,
+.product--tejesta-pdp .tejesta-product-details--legacy th {
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 400;
+}
+
+.product--tejesta-pdp .tejesta-product-details--legacy tr:first-child td:first-child {
+  width: 42% !important;
+  padding-right: 1.4rem;
+}
+
+.product--tejesta-pdp .tejesta-product-details--legacy tr:first-child td:nth-child(2) {
+  width: 58% !important;
+  padding-left: 1.4rem;
+  border-left: 0.1rem solid rgba(var(--color-foreground), 0.72);
+}
+
+.product--tejesta-pdp .tejesta-product-details--legacy tr:not(:first-child) th {
+  padding-top: 1.6rem;
+}
+
+.product--tejesta-pdp .tejesta-product-details--legacy p {
+  margin: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .product--tejesta-pdp .tejesta-product-details--legacy tr:first-child td:first-child {
+    width: 45% !important;
+  }
+
+  .product--tejesta-pdp .tejesta-product-details--legacy tr:first-child td:nth-child(2) {
+    width: 55% !important;
+  }
+}
+
 @media screen and (forced-colors: active) {
   .recipient-fields > hr {
     border-top: 0.1rem solid rgb(var(--color-background));
