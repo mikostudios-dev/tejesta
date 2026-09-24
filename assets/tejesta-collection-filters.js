@@ -123,7 +123,7 @@
       selects.forEach(updateFilterUi);
 
       items.forEach((item) => {
-        const isVisible = Object.entries(state).every(([key, value]) => {
+        const isVisible = !item.hasAttribute('data-tejesta-non-primary') && Object.entries(state).every(([key, value]) => {
           if (!value || value === 'all') return true;
           const data = normalize(item.dataset[`tejestaFilter${key.charAt(0).toUpperCase()}${key.slice(1)}`]);
           return data.split('|').includes(value);
@@ -214,6 +214,10 @@
 
     window.addEventListener('popstate', () => {
       syncStateFromUrl();
+      applyFilters({ updateUrl: false });
+    });
+
+    document.addEventListener('tejesta:family-visibility-changed', () => {
       applyFilters({ updateUrl: false });
     });
 
