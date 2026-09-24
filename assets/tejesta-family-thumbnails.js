@@ -122,6 +122,8 @@
           const randomIndex = Math.floor(Math.random() * (index + 1));
           [visibleFamily[index], visibleFamily[randomIndex]] = [visibleFamily[randomIndex], visibleFamily[index]];
         }
+      } else if (this.dataset.familyPlacement === 'product') {
+        visibleFamily = [...visibleFamily].sort((first, second) => first.url.localeCompare(second.url));
       }
 
       const links = visibleFamily.map((item) => this.appendProductLink(item, String(item.id) === currentId));
