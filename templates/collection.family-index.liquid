@@ -1,0 +1,23 @@
+{% layout none %}
+{%- paginate collection.products by 250 -%}
+{"page":{{ paginate.current_page | json }},"pages":{{ paginate.pages | json }},"products":[
+  {%- assign emitted_family_product_count = 0 -%}
+  {%- for product in collection.products -%}
+    {%- assign family_style_key = product.metafields.custom.style_key.value | default: product.metafields.custom.style_key -%}
+    {%- if family_style_key != blank -%}
+      {%- if emitted_family_product_count > 0 -%},{%- endif -%}
+      {%- assign family_frame_color = product.metafields.custom.frame_color.value | default: product.metafields.custom.frame_color | default: product.title -%}
+      {%- assign family_product_in_stock = false -%}
+      {%- for variant in product.variants -%}
+        {%- if variant.inventory_management != 'shopify' or variant.inventory_quantity > 0 -%}
+          {%- assign family_product_in_stock = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {"id":{{ product.id | json }},"key":{{ family_style_key | downcase | strip | json }},"title":{{ product.title | json }},"label":{{ family_frame_color | json }},"url":{{ product.url | json }},"inStock":{{ family_product_in_stock | json }},"image":{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 240 | json }}{% else %}null{% endif %}}
+      {%- assign emitted_family_product_count = emitted_family_product_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+]}
+{%- endpaginate -%}
+
