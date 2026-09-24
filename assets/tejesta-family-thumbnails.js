@@ -19,9 +19,11 @@
     const url = new URL(indexUrl, window.location.origin);
     url.searchParams.set('page', String(page));
 
+    // Shopify's application/json response is the collection API object, not
+    // the alternate Liquid view that contains the family product index.
     const response = await fetch(url.toString(), {
       credentials: 'same-origin',
-      headers: { Accept: 'application/json' },
+      headers: { Accept: 'text/html' },
     });
 
     if (!response.ok) throw new Error(`Family index returned ${response.status}`);
@@ -88,6 +90,12 @@
           && (item.inStock || String(item.id) === currentId)
           && item.url;
       });
+
+      const editorialCard = this.closest('[data-tejesta-editorial-product]');
+      if (editorialCard && family.length && String(family[0].id) !== currentId) {
+        editorialCard.dataset.tejestaNonPrimary = 'true';
+        document.dispatchEvent(new Event('tejesta:family-visibility-changed'));
+      }
 
       if (family.length < 2) return;
 
