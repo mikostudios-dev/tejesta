@@ -1,10 +1,11 @@
 (() => {
   const cacheLifetime = 2 * 60 * 1000;
+  const cachePrefix = 'tejesta-family-index:v2:';
   const indexRequests = new Map();
 
   function readCache(indexUrl) {
     try {
-      const cached = JSON.parse(sessionStorage.getItem(`tejesta-family-index:${indexUrl}`));
+      const cached = JSON.parse(sessionStorage.getItem(`${cachePrefix}${indexUrl}`));
       if (cached && Date.now() - cached.savedAt < cacheLifetime && Array.isArray(cached.products)) {
         return cached.products;
       }
@@ -23,6 +24,7 @@
     // the alternate Liquid view that contains the family product index.
     const response = await fetch(url.toString(), {
       credentials: 'same-origin',
+      cache: 'no-store',
       headers: { Accept: 'text/html' },
     });
 
@@ -44,7 +46,7 @@
 
     try {
       sessionStorage.setItem(
-        `tejesta-family-index:${indexUrl}`,
+        `${cachePrefix}${indexUrl}`,
         JSON.stringify({ savedAt: Date.now(), products: uniqueProducts }),
       );
     } catch (error) {
@@ -133,11 +135,76 @@
       this.hidden = false;
     }
 
+    getEditorialColorway(item, card) {
+      const explicitColorway = String(item.colorway || '').trim();
+      if (explicitColorway) return explicitColorway;
+
+      let title = String(item.title || '').trim();
+      let style = card.querySelector('.tejesta-editorial-product__title')?.textContent?.trim() || '';
+      if (/ RX$/i.test(title) && / RX$/i.test(style)) {
+        title = title.replace(/ RX$/i, '');
+        style = style.replace(/ RX$/i, '');
+      }
+
+      if (style && title.toLowerCase().startsWith(`${style.toLowerCase()} `)) {
+        return title.slice(style.length).trim();
+      }
+
+      return String(item.label || '').trim();
+    }
+
+    activateEditorialProduct(item, button) {
+      const card = this.closest('[data-tejesta-editorial-product]');
+      if (!card || !item.largeImage) return;
+
+      this.querySelectorAll('.tejesta-family-thumbnails__link').forEach((option) => {
+        const isActive = option === button;
+        option.classList.toggle('is-active', isActive);
+        option.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      const imageLink = card.querySelector('.tejesta-editorial-product__image-link');
+      let image = imageLink?.querySelector('.tejesta-editorial-product__image');
+      if (!image && imageLink) {
+        image = document.createElement('img');
+        image.className = 'tejesta-editorial-product__image';
+        image.loading = 'lazy';
+        imageLink.querySelector('.tejesta-editorial-product__placeholder')?.remove();
+        imageLink.append(image);
+      }
+      if (image) {
+        image.src = item.largeImage;
+        image.srcset = item.largeImage;
+        image.alt = item.title || item.label || image.alt;
+      }
+
+      const colorway = card.querySelector('[data-editorial-colorway]');
+      if (colorway) {
+        const label = this.getEditorialColorway(item, card);
+        colorway.textContent = label;
+        colorway.classList.toggle('is-hidden', !label);
+      }
+
+      card.querySelectorAll('[data-editorial-product-link]').forEach((link) => {
+        link.href = item.url;
+        if (link.classList.contains('tejesta-editorial-product__image-link')) {
+          link.setAttribute('aria-label', item.title || item.label || 'View product');
+        }
+      });
+    }
+
     appendProductLink(item, isCurrent) {
-      const link = document.createElement('a');
       const placement = this.dataset.familyPlacement;
       const label = item.label || item.title;
-      link.href = item.url;
+      const link = document.createElement(placement === 'editorial' ? 'button' : 'a');
+      if (placement === 'editorial') {
+        link.type = 'button';
+        link.disabled = !item.largeImage;
+        link.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+        link.addEventListener('click', () => this.activateEditorialProduct(item, link));
+      } else {
+        link.href = item.url;
+      }
       link.title = label;
       link.setAttribute('aria-label', label);
 
@@ -151,7 +218,7 @@
 
       if (isCurrent) {
         link.classList.add('is-active');
-        link.setAttribute('aria-current', 'page');
+        if (placement !== 'editorial') link.setAttribute('aria-current', 'page');
       }
 
       if (item.image) {
