@@ -49,9 +49,6 @@
 	      assign ratio = 1
 	    endif
 	    assign card_url = card_product.url
-	    if show_colorway_thumbnails and card_variant
-	      assign card_url = card_product.url | append: '?variant=' | append: card_variant.id
-	    endif
 	  -%}
 	  {%- if card_variant -%}
 	  <div
@@ -609,90 +606,7 @@
       </div>
     </div>
     {%- if show_colorway_thumbnails -%}
-      <tejesta-collection-variants
-        class="tejesta-collection-card__variants"
-        aria-label="{{ card_product.title | escape }} colorways"
-      >
-        {%- liquid
-          assign selected_variant = card_variant
-          assign max_collection_icons = 6
-          assign in_stock_variant_count = 0
-          for variant in card_product.variants
-            if variant.inventory_management != 'shopify' or variant.inventory_quantity > 0
-              assign in_stock_variant_count = in_stock_variant_count | plus: 1
-            endif
-          endfor
-          assign visible_variant_limit = max_collection_icons
-          if in_stock_variant_count > max_collection_icons
-            assign visible_variant_limit = max_collection_icons | minus: 1
-          endif
-          assign overflow_variant_count = in_stock_variant_count | minus: visible_variant_limit
-          assign visible_variant_index = 0
-        -%}
-        {%- for variant in card_product.variants -%}
-          {%- if variant.inventory_management != 'shopify' or variant.inventory_quantity > 0 -%}
-            {%- assign visible_variant_index = visible_variant_index | plus: 1 -%}
-          {%- if visible_variant_index <= visible_variant_limit -%}
-            {%- liquid
-              assign variant_image = ''
-              if variant.featured_media and variant.featured_media.preview_image
-                assign variant_image = variant.featured_media.preview_image
-              elsif variant.image
-                assign variant_image = variant.image
-              endif
-
-              assign variant_label = variant.option1 | default: variant.title
-              assign variant_alt = card_product.title | append: ' - ' | append: variant_label
-              assign variant_label_downcase = variant_label | downcase
-
-              if variant_image == blank
-                for media in card_product.media
-                  assign media_alt_downcase = media.alt | downcase
-                  if media_alt_downcase contains variant_label_downcase
-                    assign variant_image = media.preview_image
-                    break
-                  endif
-                endfor
-              endif
-            -%}
-            <button
-              type="button"
-              class="tejesta-collection-card__variant{% if variant.id == selected_variant.id %} is-active{% endif %}"
-              data-tejesta-collection-variant
-              data-variant-url="{{ card_product.url }}?variant={{ variant.id }}"
-              {% if variant_image != blank %}
-                data-variant-image="{{ variant_image | image_url: width: 1066 }}"
-              {% endif %}
-              data-variant-label="{{ variant_alt | escape }}"
-              aria-label="{{ variant_alt | escape }}"
-              aria-pressed="{% if variant.id == selected_variant.id %}true{% else %}false{% endif %}"
-            >
-              {%- if variant_image != blank -%}
-                {{
-                  variant_image
-                  | image_url: width: 120
-                  | image_tag:
-                    loading: 'lazy',
-                    class: 'tejesta-collection-card__variant-image',
-                    alt: variant_alt
-                }}
-              {%- else -%}
-                <span class="tejesta-collection-card__fallback" aria-hidden="true"></span>
-              {%- endif -%}
-            </button>
-          {%- endif -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if overflow_variant_count > 0 -%}
-          <a
-            href="{{ card_url }}"
-            class="tejesta-collection-card__variant-overflow tejesta-collection-card__link"
-            aria-label="{{ overflow_variant_count }} more colorways available"
-          >
-            +
-          </a>
-        {%- endif -%}
-      </tejesta-collection-variants>
+      {% render 'tejesta-family-thumbnails', product: card_product, placement: 'card' %}
     {%- endif -%}
   </div>
   {%- endif -%}
@@ -750,3 +664,4 @@
     </div>
   </div>
 {%- endif -%}
+

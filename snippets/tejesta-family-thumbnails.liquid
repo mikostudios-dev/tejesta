@@ -1,0 +1,39 @@
+{%- liquid
+  assign family_placement = placement | default: 'card'
+  assign family_style_key = product.metafields.custom.style_key.value | default: product.metafields.custom.style_key
+  assign family_classes = 'tejesta-family-thumbnails'
+  assign family_limit = 6
+
+  case family_placement
+    when 'card'
+      assign family_classes = family_classes | append: ' tejesta-collection-card__variants'
+      assign family_aria_label = 'Color options for ' | append: product.title
+    when 'editorial'
+      assign family_classes = family_classes | append: ' tejesta-editorial-product__colorways'
+      assign family_aria_label = 'Color options for ' | append: product.title
+      assign family_limit = 0
+    when 'product'
+      assign family_classes = family_classes | append: ' tejesta-family-thumbnails--product'
+      assign family_aria_label = 'Available colorways for ' | append: product.title
+      assign family_limit = 0
+  endcase
+-%}
+
+{%- if family_style_key != blank -%}
+  <tejesta-family-thumbnails
+    class="{{ family_classes }}"
+    data-family-key="{{ family_style_key | downcase | strip | escape }}"
+    data-family-current-id="{{ product.id }}"
+    data-family-placement="{{ family_placement }}"
+    data-family-limit="{{ family_limit }}"
+    data-family-index-url="{{ routes.all_products_collection_url | append: '?view=family-index' }}"
+    role="group"
+    aria-label="{{ family_aria_label | escape }}"
+    hidden
+  >
+    {%- if family_placement == 'product' -%}
+      <span class="tejesta-family-thumbnails__product-label">Colorway</span>
+    {%- endif -%}
+  </tejesta-family-thumbnails>
+{%- endif -%}
+
