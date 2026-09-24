@@ -115,6 +115,7 @@
 }
 
 .tejesta-editorial-product__colorway-button {
+  display: block;
   box-sizing: border-box;
   width: 100%;
   height: auto;
@@ -126,6 +127,7 @@
   color: rgb(var(--color-foreground));
   cursor: pointer;
   appearance: none;
+  text-decoration: none;
   transition: border-color 160ms ease, opacity 160ms ease;
 }
 
@@ -178,6 +180,17 @@
 }
 
 @media screen and (min-width: 990px) {
+  .tejesta-editorial-product__colorways--single-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tejesta-editorial-product__colorways--single-row .tejesta-editorial-product__colorway-button {
+    flex: 0 0 calc((100% - 4rem) / 6);
+    width: calc((100% - 4rem) / 6);
+  }
+
   .tejesta-editorial-product__media {
     overflow: hidden;
   }
@@ -293,3 +306,4 @@
     width: 100%;
   }
 }
+
