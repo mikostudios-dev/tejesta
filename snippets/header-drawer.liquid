@@ -320,7 +320,7 @@
                   Instagram
                 </a>
                 <a href="/pages/support">FAQ + Support</a>
-                <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Legal and Privacy</a>
+                <a href="{{ pages['privacy-policy'].url | default: '/pages/privacy-policy' }}?view=privacy-policy">Legal and Privacy</a>
               </nav>
 
               <p class="menu-drawer__subscribe-copyright">&copy;Tejesta {{ 'now' | date: '%Y' }}</p>
