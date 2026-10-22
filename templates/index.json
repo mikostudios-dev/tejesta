@@ -147,6 +147,7 @@
         "text_Bk4tQB",
         "buttons_CTbBjG"
       ],
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/OPTICAL_COLLECTION_PHOTO.webp",
@@ -165,6 +166,7 @@
     },
     "tejesta_line_divider_after_optical": {
       "type": "tejesta-line-art-divider",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "divider_width": 90,
@@ -207,6 +209,7 @@
         "text_RX9633",
         "buttons_xgtAe4"
       ],
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/ARTESANIA_COLLECTION_PHOTO.webp",
@@ -225,6 +228,7 @@
     },
     "tejesta_line_divider_after_artesania": {
       "type": "tejesta-line-art-divider",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "divider_width": 90,
@@ -267,6 +271,7 @@
         "text_3dLHQr",
         "buttons_BJ4dR8"
       ],
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/TEJESTA_VAQUERO_BANNER_HOME_PAGE.webp",
@@ -285,6 +290,7 @@
     },
     "tejesta_line_art_divider_CtbWyb": {
       "type": "tejesta-line-art-divider",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "divider_width": 90,
