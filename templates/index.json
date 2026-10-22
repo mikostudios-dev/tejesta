@@ -87,6 +87,7 @@
         "text_PiTKQD",
         "buttons_PgTphH"
       ],
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/SUN_COLLECTION_PHOTO.webp",
@@ -105,6 +106,7 @@
     },
     "tejesta_line_divider_after_sun": {
       "type": "tejesta-line-art-divider",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "divider_width": 90,
