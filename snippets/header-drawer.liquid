@@ -319,8 +319,10 @@
                 >
                   Instagram
                 </a>
-                <a href="/pages/support">FAQ + Support</a>
-                <a href="{{ pages['privacy-policy'].url | default: '/pages/privacy-policy' }}?view=privacy-policy">Legal and Privacy</a>
+                <a href="/pages/contact">Contact Us</a>
+                <a href="{{ pages['refunds-policy'].url | default: '/pages/refunds-policy' }}?view=shipping-returns">Shipping + Returns</a>
+                <a href="{{ pages['privacy-policy'].url | default: '/pages/privacy-policy' }}?view=privacy-policy">Privacy</a>
+                <a href="{{ pages['terms-of-service'].url | default: '/pages/terms-of-service' }}?view=terms-of-use">Terms</a>
               </nav>
 
               <p class="menu-drawer__subscribe-copyright">&copy;Tejesta {{ 'now' | date: '%Y' }}</p>
