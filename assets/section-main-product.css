@@ -1673,6 +1673,11 @@ a.product__text {
     padding: 2.4rem 0 0;
   }
 
+  .product--tejesta-pdp.product--stacked .product__media-list .product__media-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .product--tejesta-pdp .product__column-sticky {
     top: calc(var(--header-height, 7.6rem) + 2rem);
   }
