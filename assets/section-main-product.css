@@ -1368,6 +1368,11 @@ a.product__text {
 }
 
 /* PDP images use their natural ratio at the full gallery-column width. */
+.product--tejesta-pdp .product__media-list .global-media-settings {
+  --media-border-width: 0px;
+  border: 0;
+}
+
 .product--tejesta-pdp .product-media-container.media-type-image {
   width: 100%;
   max-width: 100%;
