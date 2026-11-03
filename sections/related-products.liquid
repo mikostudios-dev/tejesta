@@ -1,6 +1,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'section-related-products.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tejesta-related-products.js' | asset_url }}" defer="defer"></script>
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -26,22 +27,40 @@
     data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
+    data-tejesta-selection
+    data-limit="{{ section.settings.products_to_show }}"
   >
-    {% if recommendations.performed and recommendations.products_count > 0 %}
+    {%- liquid
+      assign curated_products = product.metafields.custom.related_products.value
+      assign candidate_products = collections.all.products
+      assign selection_mode = 'random'
+      if curated_products != blank and curated_products.size > 0
+        assign candidate_products = curated_products
+        assign selection_mode = 'curated'
+      endif
+      assign seen_ids = '|'
+      assign eligible_count = 0
+    -%}
+    {% if recommendations.performed %}
       <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
       <ul
         class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
         role="list"
+        data-selection-mode="{{ selection_mode }}"
       >
         {% assign skip_card_product_styles = false %}
-        {% for recommendation in recommendations.products %}
+        {% for recommendation in candidate_products limit: 50 %}
+          {%- assign product_token = recommendation.id | prepend: '|' | append: '|' -%}
           {%- capture product_has_stock -%}
             {% render 'tejesta-product-has-stock', product: recommendation %}
           {%- endcapture -%}
-          {%- if product_has_stock == 'true' -%}
-          <li class="grid__item">
+          {%- if product_has_stock == 'true' and recommendation.id != product.id -%}
+          {%- unless seen_ids contains product_token -%}
+          {%- assign seen_ids = seen_ids | append: recommendation.id | append: '|' -%}
+          {%- assign eligible_count = eligible_count | plus: 1 -%}
+          <li class="grid__item" data-recommendation-id="{{ recommendation.id }}"{% if eligible_count > section.settings.products_to_show %} hidden{% endif %}>
             {% render 'card-product',
               card_product: recommendation,
               media_aspect_ratio: section.settings.image_ratio,
@@ -52,8 +71,9 @@
               skip_styles: skip_card_product_styles
             %}
           </li>
-          {%- endif -%}
           {%- assign skip_card_product_styles = true -%}
+          {%- endunless -%}
+          {%- endif -%}
         {% endfor %}
       </ul>
     {% endif %}

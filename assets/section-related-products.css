@@ -2,6 +2,11 @@
   display: block;
 }
 
+.related-products[hidden],
+.related-products .grid__item[hidden] {
+  display: none;
+}
+
 .related-products__heading {
   margin: 0 0 3rem;
 }
