@@ -16,22 +16,24 @@
 
 <section class="tejesta-policy color-{{ section.settings.color_scheme }} gradient">
   <div class="tejesta-policy__inner">
-    <header class="tejesta-policy__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      <h1 id="TejestaPolicyTitle-{{ section.id }}" class="tejesta-policy__title">{{ policy_title | escape }}</h1>
-      {%- if policy_updated != blank -%}
-        <p class="tejesta-policy__updated">Last updated: {{ policy_updated | escape }}</p>
-      {%- endif -%}
-    </header>
+    <div class="tejesta-policy__sidebar">
+      <header class="tejesta-policy__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        <h1 id="TejestaPolicyTitle-{{ section.id }}" class="tejesta-policy__title">{{ policy_title | escape }}</h1>
+        {%- if policy_updated != blank -%}
+          <p class="tejesta-policy__updated">Last updated: {{ policy_updated | escape }}</p>
+        {%- endif -%}
+      </header>
 
-    <div class="tejesta-policy__divider" aria-hidden="true">
-      <img
-        class="tejesta-policy__divider-image"
-        src="{{ 'tejesta-line-art-divider.png' | asset_url }}"
-        width="5389"
-        height="127"
-        loading="lazy"
-        alt=""
-      >
+      <div class="tejesta-policy__divider" aria-hidden="true">
+        <img
+          class="tejesta-policy__divider-image"
+          src="{{ 'tejesta-line-art-divider.png' | asset_url }}"
+          width="5389"
+          height="127"
+          loading="lazy"
+          alt=""
+        >
+      </div>
     </div>
 
     <article
