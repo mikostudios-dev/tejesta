@@ -5,7 +5,7 @@
 
 .tejesta-policy__inner {
   display: grid;
-  grid-template-columns: minmax(28rem, 27.5%) minmax(0, 1fr);
+  grid-template-columns: minmax(28rem, 27.5%) 0.8rem minmax(0, 1fr);
   width: 100%;
   max-width: 144rem;
   margin: 0 auto;
@@ -39,39 +39,22 @@
 }
 
 .tejesta-policy__divider {
-  display: none;
   position: relative;
-  align-self: stretch;
+  align-self: start;
   width: 0.8rem;
-  min-height: 100%;
-  color: currentColor;
+  height: 90rem;
 }
 
-.tejesta-policy__divider span {
+.tejesta-policy__divider-image {
   position: absolute;
-  inset: 0 auto 0 0;
-  width: 0.1rem;
-  background: currentColor;
-  box-shadow: 0.4rem 0 0 currentColor, 0.7rem 0 0 currentColor;
-}
-
-.tejesta-policy__divider::before,
-.tejesta-policy__divider::after {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  width: 0.8rem;
-  height: 0.8rem;
-  background: currentColor;
-  content: '';
-}
-
-.tejesta-policy__divider::before {
-  top: 0.8rem;
-}
-
-.tejesta-policy__divider::after {
-  bottom: 0.8rem;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 90rem;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%) rotate(90deg);
+  transform-origin: center;
 }
 
 .tejesta-policy__content {
@@ -200,31 +183,15 @@
 
   .tejesta-policy__divider {
     width: calc(100% - 4rem);
-    height: 0.8rem;
-    min-height: 0.8rem;
+    height: auto;
     margin: 0 2rem;
   }
 
-  .tejesta-policy__divider span {
-    inset: 0 auto auto 0;
+  .tejesta-policy__divider-image {
+    position: static;
     width: 100%;
-    height: 0.1rem;
-    box-shadow: 0 0.4rem 0 currentColor, 0 0.7rem 0 currentColor;
-  }
-
-  .tejesta-policy__divider::before,
-  .tejesta-policy__divider::after {
-    top: 0;
-    bottom: auto;
-  }
-
-  .tejesta-policy__divider::before {
-    left: 0;
-  }
-
-  .tejesta-policy__divider::after {
-    right: 0;
-    left: auto;
+    max-width: 100%;
+    transform: none;
   }
 
   .tejesta-policy__content {
