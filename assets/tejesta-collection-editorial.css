@@ -86,23 +86,31 @@
   align-items: center;
   justify-content: center;
   min-width: 0;
-  min-height: clamp(28rem, 28vw, 44rem);
+  min-height: 0;
   padding: clamp(2.5rem, 3.5vw, 5rem) clamp(2rem, 3vw, 4.5rem) 1rem;
 }
 
 .tejesta-editorial-product__image-link {
+  position: relative;
   display: block;
   width: 100%;
+  max-width: 72rem;
+  aspect-ratio: 2 / 1;
+  margin-inline: auto;
+  overflow: hidden;
   color: inherit;
 }
 
 .tejesta-editorial-product__image,
 .tejesta-editorial-product__placeholder {
+  position: absolute;
+  top: 50%;
+  left: 0;
   display: block;
   width: 100%;
   height: auto;
-  max-height: 72rem;
-  object-fit: contain;
+  max-height: none;
+  transform: translateY(-50%);
 }
 
 .tejesta-editorial-product__colorways {
@@ -272,9 +280,8 @@
     padding: 1.5rem 0 0.8rem;
   }
 
-  .tejesta-editorial-product__image,
-  .tejesta-editorial-product__placeholder {
-    max-height: 64rem;
+  .tejesta-editorial-product__image-link {
+    max-width: 64rem;
   }
 
   .tejesta-editorial-product__colorways {
