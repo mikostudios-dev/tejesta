@@ -55,6 +55,7 @@
           {%- capture product_has_stock -%}
             {% render 'tejesta-product-has-stock', product: recommendation %}
           {%- endcapture -%}
+          {%- assign product_has_stock = product_has_stock | strip -%}
           {%- if product_has_stock == 'true' and recommendation.id != product.id -%}
           {%- unless seen_ids contains product_token -%}
           {%- assign seen_ids = seen_ids | append: recommendation.id | append: '|' -%}
