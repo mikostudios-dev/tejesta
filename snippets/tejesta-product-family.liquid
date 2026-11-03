@@ -1,0 +1,15 @@
+{%- liquid
+  assign style_key = product.metafields.custom.style_key.value | default: product.metafields.custom.style_key | handleize | remove: '-rx'
+  assign title_key = product.title | handleize
+  assign known_families = 'crazy-horse,geronimo,comanche,seminole,shiprock,osceola,annie-o,hopkins,parker,chacon,curtis,tuttle,keeffe,hopper,nokoni,lennon,ninety,dixon,araki,raoul,sixto,taiga,erte,ray,jpg' | split: ','
+  assign family = style_key
+  for known_family in known_families
+    assign prefix = title_key | slice: 0, known_family.size
+    assign boundary = title_key | slice: known_family.size, 1
+    if style_key == known_family or prefix == known_family and boundary == '-' or title_key == known_family
+      assign family = known_family
+      break
+    endif
+  endfor
+  echo family
+-%}

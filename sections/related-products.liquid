@@ -21,66 +21,68 @@
   }
 {%- endstyle -%}
 
+{%- capture current_family -%}{% render 'tejesta-product-family', product: product %}{%- endcapture -%}
+{%- assign current_family = current_family | strip -%}
+{%- capture suggested_models -%}{% render 'tejesta-related-models', family: current_family %}{%- endcapture -%}
+{%- assign suggested_models = suggested_models | strip -%}
+{%- assign current_title = product.title | downcase -%}
+{%- assign current_is_rx = false -%}
+{%- if current_title contains ' rx' -%}{%- assign current_is_rx = true -%}{%- endif -%}
+{%- paginate collections.all.products by 250 -%}
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <tejesta-recommendations
-    class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    class="related-products page-width section-{{ section.id }}-padding isolate"
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
-    data-tejesta-selection
-    data-limit="{{ section.settings.products_to_show }}"
+    data-limit="3"
   >
-    {%- liquid
-      assign curated_products = product.metafields.custom.related_products.value
-      assign candidate_products = collections.all.products
-      assign selection_mode = 'random'
-      if curated_products != blank and curated_products.size > 0
-        assign candidate_products = curated_products
-        assign selection_mode = 'curated'
-      endif
-      assign seen_ids = '|'
-      assign eligible_count = 0
-    -%}
-
-      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
-        {{ section.settings.heading }}
-      </h2>
-      <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-        role="list"
-        data-selection-mode="{{ selection_mode }}"
-      >
-        {% assign skip_card_product_styles = false %}
-        {% for recommendation in candidate_products limit: 50 %}
-          {%- assign product_token = recommendation.id | prepend: '|' | append: '|' -%}
-          {%- capture product_has_stock -%}
-            {% render 'tejesta-product-has-stock', product: recommendation %}
-          {%- endcapture -%}
-          {%- assign product_has_stock = product_has_stock | strip -%}
-          {%- if product_has_stock == 'true' and recommendation.id != product.id -%}
-          {%- unless seen_ids contains product_token -%}
-          {%- assign seen_ids = seen_ids | append: recommendation.id | append: '|' -%}
-          {%- assign eligible_count = eligible_count | plus: 1 -%}
-          <li class="grid__item" data-recommendation-id="{{ recommendation.id }}"{% if eligible_count > section.settings.products_to_show %} hidden{% endif %}>
-            {% render 'card-product',
-              card_product: recommendation,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              skip_styles: skip_card_product_styles
-            %}
-          </li>
-          {%- assign skip_card_product_styles = true -%}
-          {%- endunless -%}
+    <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    <ul class="grid product-grid grid--3-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down" role="list" data-selection-mode="{% if suggested_models != blank %}jon{% else %}fallback{% endif %}">
+      {%- assign skip_styles = false -%}
+      {%- if suggested_models != blank -%}
+        {%- assign suggested_families = suggested_models | split: '|' | uniq -%}
+        {%- for suggested_family in suggested_families -%}
+          {%- assign chosen_product = nil -%}
+          {%- for candidate in collections.all.products -%}
+            {%- capture candidate_family -%}{% render 'tejesta-product-family', product: candidate %}{%- endcapture -%}
+            {%- assign candidate_family = candidate_family | strip -%}
+            {%- if candidate_family == suggested_family and candidate_family != current_family and candidate.id != product.id -%}
+              {%- capture has_stock -%}{% render 'tejesta-product-has-stock', product: candidate %}{%- endcapture -%}
+              {%- assign has_stock = has_stock | strip -%}
+              {%- if has_stock == 'true' -%}
+                {%- if chosen_product == nil -%}{%- assign chosen_product = candidate -%}{%- endif -%}
+                {%- assign candidate_title = candidate.title | downcase -%}
+                {%- assign candidate_is_rx = false -%}
+                {%- if candidate_title contains ' rx' -%}{%- assign candidate_is_rx = true -%}{%- endif -%}
+                {%- if candidate_is_rx == current_is_rx -%}
+                  {%- assign chosen_product = candidate -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if chosen_product != nil -%}
+            {% render 'tejesta-recommendation-card', recommendation: chosen_product, family: suggested_family, skip_styles: skip_styles %}
+            {%- assign skip_styles = true -%}
           {%- endif -%}
-        {% endfor %}
-      </ul>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%}Unmapped models use a separate generic selection, never attributed to Jon.{%- endcomment -%}
+        {%- for candidate in collections.all.products limit: 50 -%}
+          {%- capture candidate_family -%}{% render 'tejesta-product-family', product: candidate %}{%- endcapture -%}
+          {%- assign candidate_family = candidate_family | strip -%}
+          {%- capture has_stock -%}{% render 'tejesta-product-has-stock', product: candidate %}{%- endcapture -%}
+          {%- assign has_stock = has_stock | strip -%}
+          {%- if has_stock == 'true' and candidate.id != product.id and candidate_family != current_family -%}
+            {% render 'tejesta-recommendation-card', recommendation: candidate, family: candidate_family, skip_styles: skip_styles %}
+            {%- assign skip_styles = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
   </tejesta-recommendations>
-  {% if section.settings.image_shape == 'arch' %}
-    {{ 'mask-arch.svg' | inline_asset_content }}
-  {%- endif -%}
 </div>
+{%- endpaginate -%}
 
 {% schema %}
 {

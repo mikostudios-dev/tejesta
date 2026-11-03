@@ -1,0 +1,125 @@
+{
+  "dixon": [
+    "araki",
+    "jpg",
+    "erte"
+  ],
+  "ray": [
+    "keeffe",
+    "parker",
+    "hopkins"
+  ],
+  "geronimo": [
+    "keeffe",
+    "comanche",
+    "sixto"
+  ],
+  "comanche": [
+    "hopkins",
+    "taiga",
+    "nokoni"
+  ],
+  "araki": [
+    "dixon",
+    "lennon",
+    "crazy-horse"
+  ],
+  "parker": [
+    "nokoni",
+    "ray",
+    "hopper"
+  ],
+  "crazy-horse": [
+    "annie-o",
+    "araki",
+    "lennon"
+  ],
+  "jpg": [
+    "dixon",
+    "hopper",
+    "araki"
+  ],
+  "chacon": [
+    "crazy-horse",
+    "sixto",
+    "keeffe"
+  ],
+  "seminole": [
+    "comanche",
+    "taiga",
+    "nokoni"
+  ],
+  "curtis": [
+    "hopkins",
+    "raoul",
+    "comanche"
+  ],
+  "tuttle": [
+    "ray",
+    "dixon",
+    "crazy-horse"
+  ],
+  "keeffe": [
+    "chacon",
+    "sixto",
+    "ray"
+  ],
+  "osceola": [
+    "geronimo",
+    "taiga",
+    "comanche"
+  ],
+  "hopper": [
+    "nokoni",
+    "parker",
+    "erte"
+  ],
+  "nokoni": [
+    "erte",
+    "hopper",
+    "parker"
+  ],
+  "raoul": [
+    "seminole",
+    "taiga",
+    "hopkins"
+  ],
+  "annie-o": [
+    "crazy-horse",
+    "lennon",
+    "chacon"
+  ],
+  "sixto": [
+    "geronimo",
+    "annie-o",
+    "keeffe"
+  ],
+  "lennon": [
+    "crazy-horse",
+    "annie-o",
+    "chacon"
+  ],
+  "shiprock": [
+    "raoul"
+  ],
+  "taiga": [
+    "comanche",
+    "raoul",
+    "seminole"
+  ],
+  "erte": [
+    "hopper",
+    "parker",
+    "nokoni"
+  ],
+  "hopkins": [
+    "comanche",
+    "ray",
+    "parker"
+  ],
+  "ninety": [
+    "araki",
+    "jpg",
+    "dixon"
+  ]
+}

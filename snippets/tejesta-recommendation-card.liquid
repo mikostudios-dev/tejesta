@@ -1,0 +1,3 @@
+<li class="grid__item" data-recommendation-id="{{ recommendation.id }}" data-recommendation-family="{{ family | escape }}">
+  {% render 'card-product', card_product: recommendation, media_aspect_ratio: 'square', image_shape: 'default', show_secondary_image: false, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, skip_styles: skip_styles %}
+</li>

@@ -10,3 +10,29 @@
 .related-products__heading {
   margin: 0 0 3rem;
 }
+
+/* Preserve the image width while showing its central half, as in Collections. */
+.related-products .card__inner.ratio::before {
+  padding-bottom: 50%;
+}
+
+.related-products .card__inner .card__media {
+  inset: 0;
+  overflow: hidden;
+}
+
+.related-products .card__media .media {
+  height: 100%;
+}
+
+.related-products .card__media .media img {
+  top: 50%;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  transform: translateY(-50%);
+}
+
+.related-products .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
+  transform: translateY(-50%);
+}
