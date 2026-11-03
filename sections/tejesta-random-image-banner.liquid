@@ -165,6 +165,7 @@
   {%- endfor -%}
 </div>
 
+<script src="{{ 'tejesta-daily-hero.js' | asset_url }}"></script>
 <script>
   (() => {
     const section = document.getElementById('TejestaRandomBanner-{{ section.id }}');
@@ -179,65 +180,8 @@
       });
     };
 
-    const storageKey = 'tejesta-random-banner-daily-index-{{ section.id }}';
-    const rotationDuration = 24 * 60 * 60 * 1000;
-
-    const isValidIndex = (index) => Number.isInteger(index) && index >= 0 && index < options.length;
-
-    const getStoredRotation = () => {
-      try {
-        const storedRotation = JSON.parse(window.localStorage.getItem(storageKey));
-        if (!storedRotation || typeof storedRotation !== 'object') return null;
-
-        const index = Number(storedRotation.index);
-        const expiresAt = Number(storedRotation.expiresAt);
-
-        if (!isValidIndex(index) || !Number.isFinite(expiresAt)) return null;
-
-        return { index, expiresAt };
-      } catch (error) {
-        return null;
-      }
-    };
-
-    const getRandomIndex = (previousIndex = -1) => {
-      if (options.length === 1) return 0;
-
-      const availableIndexes = options
-        .map((option, index) => index)
-        .filter((index) => index !== previousIndex);
-
-      return availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
-    };
-
-    const getDailyIndex = () => {
-      const now = Date.now();
-      const storedRotation = getStoredRotation();
-
-      if (storedRotation && storedRotation.expiresAt > now) {
-        return storedRotation.index;
-      }
-
-      const selectedIndex = getRandomIndex(storedRotation?.index ?? -1);
-
-      try {
-        window.localStorage.setItem(
-          storageKey,
-          JSON.stringify({
-            index: selectedIndex,
-            expiresAt: now + rotationDuration,
-          })
-        );
-      } catch (error) {
-        // Ignore storage failures and keep the daily hero working.
-      }
-
-      return selectedIndex;
-    };
-
     if (!window.Shopify || !window.Shopify.designMode) {
-      showOption(options[getDailyIndex()]);
-      section.classList.add('is-ready');
+      window.TejestaDailyHero(section, options, showOption);
       return;
     }
 
