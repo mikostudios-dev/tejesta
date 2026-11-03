@@ -28,3 +28,12 @@ window.TejestaRelatedProducts = (section) => {
   });
   section.hidden = cards.length === 0;
 };
+
+
+if (!customElements.get('tejesta-recommendations')) {
+  customElements.define('tejesta-recommendations', class extends HTMLElement {
+    connectedCallback() {
+      window.TejestaRelatedProducts(this);
+    }
+  });
+}

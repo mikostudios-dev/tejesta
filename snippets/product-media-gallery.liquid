@@ -53,6 +53,11 @@
     endif
   endif
 
+  if include_shared_case
+    assign media_count = media_count | plus: 1
+    assign single_media_visible = false
+  endif
+
   if media_count == 1 or single_media_visible
     assign single_media_visible_mobile = true
   endif
@@ -78,6 +83,7 @@
   {% endif %}
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
+  {% if include_shared_case %}data-shared-case-gallery{% endif %}
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
@@ -240,6 +246,9 @@
           {%- endunless -%}
         {%- endfor -%}
       {%- endunless -%}
+      {%- if include_shared_case -%}
+        {% render 'tejesta-shared-case', mode: 'gallery', position: media_count, rendered_media_count: media_position %}
+      {%- endif -%}
     </ul>
     <div class="slider-buttons quick-add-hidden{% if hide_mobile_slider %} small-hide{% endif %}">
       <button
@@ -549,6 +558,9 @@
             {%- endunless -%}
           {%- endfor -%}
         {%- endunless -%}
+        {%- if include_shared_case -%}
+          {% render 'tejesta-shared-case', mode: 'thumbnail', position: media_count, rendered_media_count: media_position %}
+        {%- endif -%}
       </ul>
       <button
         type="button"

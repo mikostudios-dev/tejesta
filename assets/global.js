@@ -1137,7 +1137,6 @@ class ProductRecommendations extends HTMLElement {
   }
 
   initializeRecommendations(productId) {
-    if (this.hasAttribute('data-tejesta-selection')) this.hidden = false;
     this.observer?.unobserve(this);
     this.observer = new IntersectionObserver(
       (entries, observer) => {
@@ -1160,10 +1159,6 @@ class ProductRecommendations extends HTMLElement {
 
         if (recommendations?.innerHTML.trim().length) {
           this.innerHTML = recommendations.innerHTML;
-          if (this.hasAttribute('data-tejesta-selection') && window.TejestaRelatedProducts) {
-            this.dataset.productId = String(productId);
-            window.TejestaRelatedProducts(this);
-          }
         }
 
         if (!this.querySelector('slideshow-component') && this.classList.contains('complementary-products')) {

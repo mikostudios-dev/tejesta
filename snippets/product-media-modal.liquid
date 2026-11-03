@@ -81,6 +81,9 @@
           -%}
         {%- endfor -%}
       {%- endif -%}
+      {%- if include_shared_case -%}
+        {% render 'tejesta-shared-case', mode: 'modal' %}
+      {%- endif -%}
     </div>
   </div>
 </product-modal>

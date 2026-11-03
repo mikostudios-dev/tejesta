@@ -22,9 +22,8 @@
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
-  <product-recommendations
+  <tejesta-recommendations
     class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-    data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
     data-tejesta-selection
@@ -41,7 +40,7 @@
       assign seen_ids = '|'
       assign eligible_count = 0
     -%}
-    {% if recommendations.performed %}
+
       <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
@@ -76,8 +75,7 @@
           {%- endif -%}
         {% endfor %}
       </ul>
-    {% endif %}
-  </product-recommendations>
+  </tejesta-recommendations>
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}

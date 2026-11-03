@@ -336,6 +336,20 @@ if (!customElements.get('product-info')) {
         const newSliderButtons = html.querySelector('media-gallery .slider-buttons');
         if (sliderButtons && newSliderButtons) sliderButtons.className = newSliderButtons.className;
 
+        if (mediaGallery?.hasAttribute('data-shared-case-gallery')) {
+          const oldThumbnails = mediaGallery.querySelector('[id^="GalleryThumbnails"]');
+          const newThumbnails = html.querySelector('media-gallery [id^="GalleryThumbnails"]');
+          if (newThumbnails) {
+            if (oldThumbnails) oldThumbnails.replaceWith(newThumbnails);
+            else mediaGallery.append(newThumbnails);
+          } else {
+            oldThumbnails?.remove();
+          }
+          mediaGallery.elements.thumbnails = newThumbnails;
+          mediaGallery.reconcileSharedCase();
+          mediaGallery.bindThumbnails();
+        }
+
         // set featured media as active in the media gallery
         const activeMediaId = variantFeaturedMediaId
           ? `${this.dataset.section}-${variantFeaturedMediaId}`
@@ -347,6 +361,7 @@ if (!customElements.get('product-info')) {
         const modalContent = this.productModal?.querySelector(`.product-media-modal__content`);
         const newModalContent = html.querySelector(`product-modal .product-media-modal__content`);
         if (modalContent && newModalContent) modalContent.innerHTML = newModalContent.innerHTML;
+        mediaGallery?.reconcileSharedCase?.();
       }
 
       setQuantityBoundries() {

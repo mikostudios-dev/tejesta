@@ -1,0 +1,27 @@
+{%- liquid
+  assign case_url = 'https://cdn.shopify.com/s/files/1/0017/7887/6514/files/TEJESTA-Case_new_bg.png?v=1792699128'
+  assign case_id = section.id | append: '-tejesta-case'
+  assign case_alt = 'TEJESTA case and packaging'
+-%}
+{%- case mode -%}
+  {%- when 'gallery' -%}
+    <li id="Slide-{{ case_id }}" class="product__media-item grid__item slider__slide{% unless rendered_media_count > 0 %} is-active{% endunless %}" data-media-id="{{ case_id }}" data-tejesta-shared-case>
+      <div class="product-media-container media-type-image media-fit-{{ section.settings.media_fit }} global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}" style="--ratio: 1; --preview-ratio: 1;">
+        <modal-opener class="product__modal-opener product__modal-opener--image" data-modal="#ProductModal-{{ section.id }}">
+          <span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--{{ section.settings.image_zoom }}" aria-hidden="true"><span class="svg-wrapper">{{ 'icon-zoom.svg' | inline_asset_content }}</span></span>
+          <div class="product__media media media--transparent">
+            <img src="{{ case_url }}&width=1445" srcset="{{ case_url }}&width=493 493w, {{ case_url }}&width=990 990w, {{ case_url }}&width=1445 1445w, {{ case_url }}&width=1946 1946w" sizes="(min-width: 990px) 66vw, 100vw" width="3000" height="3000" alt="{{ case_alt }}" loading="lazy" class="image-magnify-{{ section.settings.image_zoom }}">
+          </div>
+          <button class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ case_id }}"><span class="visually-hidden">{{ 'products.product.media.open_media' | t: index: position }}</span></button>
+        </modal-opener>
+      </div>
+    </li>
+  {%- when 'thumbnail' -%}
+    <li id="Slide-Thumbnails-{{ case_id }}" class="thumbnail-list__item slider__slide" data-target="{{ case_id }}" data-media-position="{{ position }}" data-tejesta-shared-case>
+      <button class="thumbnail global-media-settings global-media-settings--no-shadow" type="button" aria-label="{{ 'products.product.media.load_image' | t: index: position }}" aria-controls="GalleryViewer-{{ section.id }}"{% unless rendered_media_count > 0 %} aria-current="true"{% endunless %}>
+        <img src="{{ case_url }}&width=208" width="208" height="208" alt="{{ case_alt }}" loading="lazy">
+      </button>
+    </li>
+  {%- when 'modal' -%}
+    <img class="global-media-settings global-media-settings--no-shadow" src="{{ case_url }}&width=1946" width="3000" height="3000" alt="{{ case_alt }}" loading="lazy" data-media-id="{{ case_id }}" data-tejesta-shared-case>
+{%- endcase -%}

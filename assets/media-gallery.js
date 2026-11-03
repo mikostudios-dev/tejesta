@@ -10,9 +10,13 @@ if (!customElements.get('media-gallery')) {
           thumbnails: this.querySelector('[id^="GalleryThumbnails"]'),
         };
         this.mql = window.matchMedia('(min-width: 750px)');
-        if (!this.elements.thumbnails) return;
-
+        this.reconcileSharedCase();
         this.elements.viewer.addEventListener('slideChanged', debounce(this.onSlideChanged.bind(this), 500));
+        this.bindThumbnails();
+      }
+
+      bindThumbnails() {
+        if (!this.elements.thumbnails) return;
         this.elements.thumbnails.querySelectorAll('[data-target]').forEach((mediaToSwitch) => {
           mediaToSwitch
             .querySelector('button')
@@ -21,7 +25,46 @@ if (!customElements.get('media-gallery')) {
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
       }
 
+      reconcileSharedCase() {
+        if (!this.hasAttribute('data-shared-case-gallery')) return;
+        const viewer = this.elements.viewer;
+        const shared = viewer.querySelector('li[data-tejesta-shared-case]');
+        if (!shared) return;
+        const isCase = (element) => Array.from(element.querySelectorAll('img')).some((image) => {
+          const filename = (image.getAttribute('src') || '').split('?')[0].split('/').pop();
+          return /^TEJESTA-Case_new_bg(?:_\d+x\d*)?\.png$/i.test(filename);
+        });
+        viewer.querySelectorAll('li[data-media-id]').forEach((item) => {
+          if (item !== shared && isCase(item)) {
+            this.elements.thumbnails?.querySelector(`[data-target="${item.dataset.mediaId}"]`)?.remove();
+            item.remove();
+          }
+        });
+        shared.parentElement.append(shared);
+        const items = Array.from(viewer.querySelectorAll('li[data-media-id]'));
+        if (!items.some((item) => item.classList.contains('is-active'))) items[0].classList.add('is-active');
+        const thumbnails = this.elements.thumbnails;
+        const sharedThumbnail = thumbnails?.querySelector('[data-tejesta-shared-case]');
+        if (sharedThumbnail) sharedThumbnail.parentElement.append(sharedThumbnail);
+        thumbnails?.querySelectorAll('[data-target]').forEach((item, index) => {
+          item.dataset.mediaPosition = index + 1;
+          const active = items.find((slide) => slide.dataset.mediaId === item.dataset.target)?.classList.contains('is-active');
+          if (active) item.querySelector('button').setAttribute('aria-current', 'true');
+          else item.querySelector('button').removeAttribute('aria-current');
+        });
+        const total = viewer.querySelector('.slider-counter--total');
+        if (total) total.textContent = items.length;
+        if (items.length === 1) viewer.querySelector('.slider-buttons')?.classList.add('small-hide');
+        viewer.resetPages?.();
+        const modal = document.getElementById(`ProductModal-${this.id.replace('MediaGallery-', '')}`);
+        modal?.querySelectorAll('img[data-media-id]:not([data-tejesta-shared-case])').forEach((image) => {
+          const filename = (image.getAttribute('src') || '').split('?')[0].split('/').pop();
+          if (/^TEJESTA-Case_new_bg(?:_\d+x\d*)?\.png$/i.test(filename)) image.remove();
+        });
+      }
+
       onSlideChanged(event) {
+        if (!event.detail.currentElement || !this.elements.thumbnails) return;
         const thumbnail = this.elements.thumbnails.querySelector(
           `[data-target="${event.detail.currentElement.dataset.mediaId}"]`
         );
@@ -40,7 +83,7 @@ if (!customElements.get('media-gallery')) {
         });
         activeMedia?.classList?.add('is-active');
 
-        if (prepend) {
+        if (prepend && !activeMedia.hasAttribute('data-tejesta-shared-case')) {
           activeMedia.parentElement.firstChild !== activeMedia && activeMedia.parentElement.prepend(activeMedia);
 
           if (this.elements.thumbnails) {

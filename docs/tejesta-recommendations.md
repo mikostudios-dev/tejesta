@@ -1,6 +1,6 @@
 # Product recommendations
 
-The product template already requests four products in four desktop columns and two mobile columns. The related-products section now draws random, unique in-stock candidates from the first 50 products exposed by the All collection, excluding the current product. Fewer eligible candidates produce fewer cards; zero candidates hides the section. It retains the existing theme stock rule.
+The product template already requests four products in four desktop columns and two mobile columns. The section renders its candidates directly in the product page HTML, without waiting for Shopify's recommendations endpoint or a metafield. Its custom element then selects and displays the cards. The related-products section draws random, unique in-stock candidates from the first 50 products exposed by the All collection, excluding the current product. Fewer eligible candidates produce fewer cards; zero candidates hides the section. It retains the existing theme stock rule.
 
 When the client's style mapping is approved, populate `custom.related_products` on each source product as a `list.product_reference` metafield. Those references take priority, preserve their order and are not randomized. The same exclusions and display limit apply. Apply the approved list to each product belonging to the relevant style; this code does not infer or invent relationships. No metafield definitions, product data or catalog relationships have been created by this change.
 
