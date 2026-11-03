@@ -19,6 +19,12 @@ product-info {
   padding-left: 0;
 }
 
+.product--tejesta-pdp .product__media-wrapper > media-gallery {
+  display: block;
+  width: 97%;
+  margin-inline: auto;
+}
+
 @media screen and (min-width: 750px) {
   .product__column-sticky {
     display: block;
