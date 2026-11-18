@@ -12,10 +12,6 @@
             <a data-product-link href="{{ first_product.url }}" aria-label="{{ first_product.title | escape }}">
               {{ first_product.featured_image | image_url: width: 1000 | image_tag: widths: '320, 500, 750, 1000', sizes: '(min-width: 990px) 25vw, (min-width: 600px) 50vw, 100vw', loading: 'lazy', class: 'tejesta-seven-style__image' }}
             </a>
-            <div class="tejesta-seven-style__controls" hidden>
-              <button type="button" data-direction="-1" aria-label="Previous color for {{ block.settings.title | escape }}"><span aria-hidden="true">←</span></button>
-              <button type="button" data-direction="1" aria-label="Next color for {{ block.settings.title | escape }}"><span aria-hidden="true">→</span></button>
-            </div>
           </div>
           <div class="tejesta-seven-style__caption" aria-live="polite" aria-atomic="true">
             <a data-product-link data-product-title href="{{ first_product.url }}">{{ first_product.title | escape }}</a>

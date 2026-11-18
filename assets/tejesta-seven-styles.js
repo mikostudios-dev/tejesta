@@ -14,12 +14,6 @@
       const choices = this.colors.map((color, index) => index).filter(index => String(this.colors[index].id) !== previous);
       this.index = choices.length ? choices[Math.floor(Math.random() * choices.length)] : 0;
       this.render();
-      const controls = this.querySelector('.tejesta-seven-style__controls');
-      controls.hidden = this.colors.length < 2;
-      controls.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
-        this.index = (this.index + Number(button.dataset.direction) + this.colors.length) % this.colors.length;
-        this.render();
-      }));
     }
     render() {
       const color = this.colors[this.index];
