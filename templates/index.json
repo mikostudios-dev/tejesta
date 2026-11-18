@@ -182,7 +182,7 @@
           "type": "heading",
           "disabled": true,
           "settings": {
-            "heading": "Artesanía",
+            "heading": "Artesan\u00eda",
             "heading_logo_asset": "artesania",
             "heading_size": "h0"
           }
@@ -243,7 +243,7 @@
         "heading_wmYpfV": {
           "type": "heading",
           "settings": {
-            "heading": "Artesanía",
+            "heading": "Artesan\u00eda",
             "heading_logo_asset": "vaquero",
             "heading_size": "h0"
           }
@@ -298,11 +298,82 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "seven_styles": {
+      "type": "tejesta-seven-styles",
+      "blocks": {
+        "taiga": {
+          "type": "style",
+          "settings": {
+            "title": "Taiga",
+            "products": [
+              "taiga-piano",
+              "taiga-honey-havna",
+              "taiga-brg",
+              "taiga-desert",
+              "taiga-denim",
+              "taiga-carob"
+            ]
+          }
+        },
+        "erte": {
+          "type": "style",
+          "settings": {
+            "title": "Erte",
+            "products": [
+              "erte-piano",
+              "erte-honey-havana",
+              "erte-carob",
+              "erte-burgundy",
+              "erte-desert",
+              "erte-brg"
+            ]
+          }
+        },
+        "ninety": {
+          "type": "style",
+          "settings": {
+            "title": "Ninety",
+            "products": [
+              "ninety-piano",
+              "ninety-honey-havana",
+              "ninety-brg",
+              "ninety-desert",
+              "ninety-burgundy",
+              "ninety-carob"
+            ]
+          }
+        },
+        "hopkins": {
+          "type": "style",
+          "settings": {
+            "title": "Hopkins",
+            "products": [
+              "hopkins-desert",
+              "hopkins-honey-havana",
+              "hopkins-burgundy",
+              "hopkins-brg",
+              "hopkins-carob",
+              "hopkins-piano"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "taiga",
+        "erte",
+        "ninety",
+        "hopkins"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
     "image_banner",
     "collection_seven",
+    "seven_styles",
     "image_banner_VtR9UH",
     "tejesta_line_divider_after_sun",
     "image_banner_gdWexg",

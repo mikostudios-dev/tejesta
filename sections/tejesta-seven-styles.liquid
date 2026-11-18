@@ -1,0 +1,52 @@
+{{ 'tejesta-seven-styles.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tejesta-seven-styles.js' | asset_url }}" defer="defer"></script>
+<section class="tejesta-seven-styles color-{{ section.settings.color_scheme }} gradient" aria-label="Collection Seven styles">
+  <h2 class="visually-hidden">Collection Seven — explore the styles</h2>
+  <div class="tejesta-seven-styles__grid">
+    {% for block in section.blocks %}
+      {% assign first_product = block.settings.products | where: 'featured_image' | first %}
+      {% if first_product != blank %}
+        <tejesta-seven-style class="tejesta-seven-style" data-style-key="{{ section.id }}:{{ block.id }}" {{ block.shopify_attributes }}>
+          <h3 class="visually-hidden">{{ block.settings.title | escape }}</h3>
+          <div class="tejesta-seven-style__media">
+            <a data-product-link href="{{ first_product.url }}" aria-label="{{ first_product.title | escape }}">
+              {{ first_product.featured_image | image_url: width: 1000 | image_tag: widths: '320, 500, 750, 1000', sizes: '(min-width: 990px) 25vw, (min-width: 600px) 50vw, 100vw', loading: 'lazy', class: 'tejesta-seven-style__image' }}
+            </a>
+            <div class="tejesta-seven-style__controls" hidden>
+              <button type="button" data-direction="-1" aria-label="Previous color for {{ block.settings.title | escape }}"><span aria-hidden="true">←</span></button>
+              <button type="button" data-direction="1" aria-label="Next color for {{ block.settings.title | escape }}"><span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+          <div class="tejesta-seven-style__caption" aria-live="polite" aria-atomic="true">
+            <a data-product-link data-product-title href="{{ first_product.url }}">{{ first_product.title | escape }}</a>
+            <span data-product-price>{{ first_product.price | money }}</span>
+          </div>
+          <script type="application/json" data-colorways>[
+            {% assign emitted = 0 %}
+            {% for item in block.settings.products %}
+              {% if item.featured_image != blank %}
+                {% if emitted > 0 %},{% endif %}
+                {"id":{{ item.id | json }},"title":{{ item.title | json | replace: '<', '\u003c' }},"url":{{ item.url | json }},"image":{{ item.featured_image | image_url: width: 1000 | json }},"price":{{ item.price | money | json | replace: '<', '\u003c' }}}
+                {% assign emitted = emitted | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          ]</script>
+        </tejesta-seven-style>
+      {% elsif request.design_mode %}
+        <p>Select the {{ block.settings.title | escape }} colorways in this block.</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Seven styles + colors",
+  "max_blocks": 4,
+  "settings": [{"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}],
+  "blocks": [{"type":"style","name":"Style","settings":[
+    {"type":"text","id":"title","label":"Style name","default":"Style"},
+    {"type":"product_list","id":"products","label":"Colorways for this style","limit":12,"info":"Select only colors of this style. Each reload picks a different color where alternatives exist."}
+  ]}],
+  "presets": [{"name":"Seven styles + colors"}]
+}
+{% endschema %}
