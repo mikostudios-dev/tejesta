@@ -1592,6 +1592,23 @@ a.product__text {
   margin: 0;
 }
 
+/* Invert only the available Add to cart control, including keyboard focus. */
+.product--tejesta-pdp .product-form__submit.button--tejesta-frame:not(:disabled):not([aria-disabled='true']):focus-visible {
+  background-color: #000;
+  color: #fff;
+  --tejesta-frame-button-image: var(--tejesta-frame-button-image-light);
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .product--tejesta-pdp .product-form__submit.button--tejesta-frame:not(:disabled):not([aria-disabled='true']):hover {
+    background-color: #000;
+    color: #fff;
+    --tejesta-frame-button-image: var(--tejesta-frame-button-image-light);
+  }
+}
+
 .product--tejesta-pdp .product__description {
   margin: 2.4rem 0 0;
   font-size: 1.45rem;
