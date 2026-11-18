@@ -299,11 +299,13 @@
                   </small>
                 {%- endif -%}
                 {%- if form.posted_successfully? -%}
-                  <h3 class="menu-drawer__subscribe-message menu-drawer__subscribe-message--success" id="ContactDrawer-success" tabindex="-1" autofocus>
-                    {{- 'newsletter.success' | t }}
+                  <h3 class="menu-drawer__subscribe-message menu-drawer__subscribe-message--success" id="ContactDrawer-success" data-newsletter-success tabindex="-1" autofocus>
+                    Thank you
                   </h3>
                 {%- endif -%}
+                <p class="menu-drawer__subscribe-message" data-newsletter-status role="status" aria-live="polite" hidden></p>
               {%- endform -%}
+              <script src="{{ 'tejesta-drawer-newsletter.js' | asset_url }}" defer="defer"></script>
 
               <nav class="menu-drawer__subscribe-nav" aria-label="Footer menu">
                 <a

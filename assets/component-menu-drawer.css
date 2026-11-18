@@ -429,3 +429,15 @@ header-drawer .menu-drawer--jon .menu-drawer__navigation {
 .menu-drawer--jon .menu-drawer__subscribe-nav a {
   font-size: 1.6rem;
 }
+
+.menu-drawer__subscribe [hidden] { display: none !important; }
+.menu-drawer__subscribe-verification {
+  width: 100%;
+  min-height: 420px;
+  border: 0;
+  background: #fff;
+}
+.menu-drawer__subscribe-message--success {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
