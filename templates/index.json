@@ -52,6 +52,94 @@
         "button_link": "/collections/all?collection=collection-7"
       }
     },
+    "seven_styles": {
+      "type": "tejesta-seven-styles",
+      "blocks": {
+        "taiga": {
+          "type": "style",
+          "settings": {
+            "title": "Taiga",
+            "products": [
+              "taiga-piano",
+              "taiga-honey-havna",
+              "taiga-brg",
+              "taiga-desert",
+              "taiga-denim",
+              "taiga-carob"
+            ]
+          }
+        },
+        "erte": {
+          "type": "style",
+          "settings": {
+            "title": "Erte",
+            "products": [
+              "erte-piano",
+              "erte-honey-havana",
+              "erte-carob",
+              "erte-burgundy",
+              "erte-desert",
+              "erte-brg"
+            ]
+          }
+        },
+        "ninety": {
+          "type": "style",
+          "settings": {
+            "title": "Ninety",
+            "products": [
+              "ninety-piano",
+              "ninety-honey-havana",
+              "ninety-brg",
+              "ninety-desert",
+              "ninety-burgundy",
+              "ninety-carob"
+            ]
+          }
+        },
+        "hopkins": {
+          "type": "style",
+          "settings": {
+            "title": "Hopkins",
+            "products": [
+              "hopkins-desert",
+              "hopkins-honey-havana",
+              "hopkins-burgundy",
+              "hopkins-brg",
+              "hopkins-carob",
+              "hopkins-piano"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "taiga",
+        "erte",
+        "ninety",
+        "hopkins"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    },
+    "tejesta_line_divider_after_sun": {
+      "type": "tejesta-line-art-divider",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "divider_width": 90,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "split_signup": {
+      "type": "tejesta-split-newsletter",
+      "settings": {
+        "image": "shopify://shop_images/SUN_COLLECTION_PHOTO.webp",
+        "heading": "Stay Connected",
+        "text": "",
+        "color_scheme": "scheme-1"
+      }
+    },
     "image_banner_VtR9UH": {
       "type": "image-banner",
       "blocks": {
@@ -102,15 +190,6 @@
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
         "show_text_below": true
-      }
-    },
-    "tejesta_line_divider_after_sun": {
-      "type": "tejesta-line-art-divider",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "divider_width": 90,
-        "padding_top": 48,
-        "padding_bottom": 48
       }
     },
     "image_banner_gdWexg": {
@@ -182,7 +261,7 @@
           "type": "heading",
           "disabled": true,
           "settings": {
-            "heading": "Artesan\u00eda",
+            "heading": "Artesanía",
             "heading_logo_asset": "artesania",
             "heading_size": "h0"
           }
@@ -243,7 +322,7 @@
         "heading_wmYpfV": {
           "type": "heading",
           "settings": {
-            "heading": "Artesan\u00eda",
+            "heading": "Artesanía",
             "heading_logo_asset": "vaquero",
             "heading_size": "h0"
           }
@@ -298,94 +377,15 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
-    },
-    "seven_styles": {
-      "type": "tejesta-seven-styles",
-      "blocks": {
-        "taiga": {
-          "type": "style",
-          "settings": {
-            "title": "Taiga",
-            "products": [
-              "taiga-piano",
-              "taiga-honey-havna",
-              "taiga-brg",
-              "taiga-desert",
-              "taiga-denim",
-              "taiga-carob"
-            ]
-          }
-        },
-        "erte": {
-          "type": "style",
-          "settings": {
-            "title": "Erte",
-            "products": [
-              "erte-piano",
-              "erte-honey-havana",
-              "erte-carob",
-              "erte-burgundy",
-              "erte-desert",
-              "erte-brg"
-            ]
-          }
-        },
-        "ninety": {
-          "type": "style",
-          "settings": {
-            "title": "Ninety",
-            "products": [
-              "ninety-piano",
-              "ninety-honey-havana",
-              "ninety-brg",
-              "ninety-desert",
-              "ninety-burgundy",
-              "ninety-carob"
-            ]
-          }
-        },
-        "hopkins": {
-          "type": "style",
-          "settings": {
-            "title": "Hopkins",
-            "products": [
-              "hopkins-desert",
-              "hopkins-honey-havana",
-              "hopkins-burgundy",
-              "hopkins-brg",
-              "hopkins-carob",
-              "hopkins-piano"
-            ]
-          }
-        }
-      },
-      "block_order": [
-        "taiga",
-        "erte",
-        "ninety",
-        "hopkins"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1"
-      }
-    },
-    "split_signup": {
-      "type": "tejesta-split-newsletter",
-      "settings": {
-        "image": "shopify://shop_images/SUN_COLLECTION_PHOTO.webp",
-        "heading": "Stay Connected",
-        "text": "",
-        "color_scheme": "scheme-1"
-      }
     }
   },
   "order": [
     "image_banner",
     "collection_seven",
     "seven_styles",
+    "tejesta_line_divider_after_sun",
     "split_signup",
     "image_banner_VtR9UH",
-    "tejesta_line_divider_after_sun",
     "image_banner_gdWexg",
     "tejesta_line_divider_after_optical",
     "image_banner_YtLCfF",
