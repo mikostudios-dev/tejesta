@@ -1709,8 +1709,21 @@ a.product__text {
     max-width: 100%;
   }
 
+  /* Keep expanded product details reachable without scrolling the whole gallery. */
   .product--tejesta-pdp .product__column-sticky {
     top: calc(var(--header-height, 7.6rem) + 2rem);
+    max-height: calc(100vh - var(--header-height, 7.6rem) - 4rem);
+    max-height: calc(100dvh - var(--header-height, 7.6rem) - 4rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    scroll-padding-block: 1rem;
+    padding: 0.4rem;
+  }
+
+  .product--tejesta-pdp .product__column-sticky:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
 
   .product--tejesta-pdp .product__media .media,
