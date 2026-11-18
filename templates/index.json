@@ -149,6 +149,17 @@
         "padding_bottom": 48
       }
     },
+    "split_sun_editorial": {
+      "type": "tejesta-split-editorial",
+      "settings": {
+        "heading": "SUN",
+        "text": "<p>Frames shaped for light, considered in every detail.</p>",
+        "button_label": "Shop Sunglasses",
+        "button_link": "/collections/all?type=sunglasses",
+        "image": "shopify://shop_images/TEJESTA_VAQUERO_BANNER_HOME_PAGE.webp",
+        "color_scheme": "scheme-1"
+      }
+    },
     "image_banner_VtR9UH": {
       "type": "image-banner",
       "blocks": {
@@ -376,17 +387,6 @@
         "divider_width": 90,
         "padding_top": 48,
         "padding_bottom": 48
-      }
-    },
-    "split_sun_editorial": {
-      "type": "tejesta-split-editorial",
-      "settings": {
-        "heading": "Sun Collection",
-        "text": "<p>Frames shaped for light, considered in every detail.</p>",
-        "button_label": "Shop Sunglasses",
-        "button_link": "/collections/all?type=sunglasses",
-        "image": "shopify://shop_images/TEJESTA_VAQUERO_BANNER_HOME_PAGE.webp",
-        "color_scheme": "scheme-1"
       }
     }
   },
