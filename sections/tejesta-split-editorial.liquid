@@ -1,0 +1,47 @@
+{%- style -%}
+  #TejestaEditorial-{{ section.id }} { background:rgb(var(--color-background)); color:rgb(var(--color-foreground)); }
+  #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__content { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:clamp(3rem,6vw,10rem); text-align:center; }
+  #TejestaEditorial-{{ section.id }} h2 { font-family:'TEJESTA Louize Display',var(--font-heading-family); font-size:clamp(2.8rem,2.8vw,4.2rem); font-weight:400; margin:0 0 2.4rem; }
+  #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__copy { max-width:42rem; font-size:1.5rem; line-height:1.5; }
+  #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__copy p { margin:0; }
+  #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__button { margin-top:3rem; --tejesta-frame-button-width:18rem; --tejesta-frame-button-height:4.3rem; --tejesta-frame-button-padding:0 2rem; --tejesta-frame-button-font-size:1.4rem; }
+  #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__image { display:block; width:100%; height:100%; object-fit:cover; aspect-ratio:1 / 1.15; }
+  @media(max-width:749px) {
+    #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__grid { grid-template-columns:1fr; }
+    #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__media { order:-1; }
+    #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__image { aspect-ratio:4 / 5; }
+    #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__content { padding:5rem 2.4rem; }
+  }
+{%- endstyle -%}
+<section id="TejestaEditorial-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient" aria-labelledby="TejestaEditorialHeading-{{ section.id }}">
+  <div class="tejesta-split-editorial__grid">
+    <div class="tejesta-split-editorial__content">
+      <h2 id="TejestaEditorialHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.text != blank %}<div class="tejesta-split-editorial__copy rte">{{ section.settings.text }}</div>{% endif %}
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}<a class="button--tejesta-frame tejesta-split-editorial__button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>{% endif %}
+    </div>
+    <div class="tejesta-split-editorial__media">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '375, 550, 750, 1100, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', class: 'tejesta-split-editorial__image' }}
+      {% else %}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'tejesta-split-editorial__image' }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"TEJESTA split editorial",
+  "settings":[
+    {"type":"paragraph","content":"Provisional campaign image and reference copy. Jon's red design note asks for new Sun text; replace when final copy arrives."},
+    {"type":"text","id":"heading","label":"Heading","default":"Sun Collection"},
+    {"type":"richtext","id":"text","label":"Text","default":"<p>Frames shaped for light, considered in every detail.</p>"},
+    {"type":"text","id":"button_label","label":"Button text","default":"Shop Sunglasses"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"image_picker","id":"image","label":"Editorial image"},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "presets":[{"name":"TEJESTA split editorial"}]
+}
+{% endschema %}
