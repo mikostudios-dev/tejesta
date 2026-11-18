@@ -368,12 +368,22 @@
       "settings": {
         "color_scheme": "scheme-1"
       }
+    },
+    "split_signup": {
+      "type": "tejesta-split-newsletter",
+      "settings": {
+        "image": "shopify://shop_images/SUN_COLLECTION_PHOTO.webp",
+        "heading": "Stay Connected",
+        "text": "",
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
     "image_banner",
     "collection_seven",
     "seven_styles",
+    "split_signup",
     "image_banner_VtR9UH",
     "tejesta_line_divider_after_sun",
     "image_banner_gdWexg",

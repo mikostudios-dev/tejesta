@@ -1,0 +1,61 @@
+{%- assign form_id = 'TejestaSignup-' | append: section.id -%}
+{%- style -%}
+  #TejestaSplitSignup-{{ section.id }} { background: rgb(var(--color-background)); color: rgb(var(--color-foreground)); }
+  #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__image { display:block; width:100%; height:100%; object-fit:cover; aspect-ratio: 1 / 1.15; }
+  #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__content { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:clamp(3rem,6vw,10rem); }
+  #TejestaSplitSignup-{{ section.id }} h2 { font-family:'TEJESTA Louize Display',var(--font-heading-family); font-size:clamp(2.8rem,2.8vw,4.2rem); font-weight:400; margin:0 0 2.4rem; }
+  #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__copy { font-size:1.5rem; line-height:1.5; margin-bottom:2.4rem; }
+  #TejestaSplitSignup-{{ section.id }} form { width:100%; max-width:42rem; }
+  #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__field { display:flex; align-items:center; border-bottom:1px solid currentColor; gap:1rem; }
+  #TejestaSplitSignup-{{ section.id }} input { min-width:0; width:100%; padding:1.4rem 0; border:0; background:transparent; color:inherit; font:inherit; font-size:1.4rem; border-radius:0; }
+  #TejestaSplitSignup-{{ section.id }} button { flex-shrink:0; min-width:44px; min-height:44px; border:0; background:transparent; color:inherit; font:inherit; font-size:2.4rem; cursor:pointer; }
+  #TejestaSplitSignup-{{ section.id }} input:focus-visible, #TejestaSplitSignup-{{ section.id }} button:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+  #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__message { font-size:1.5rem; margin:1.6rem 0 0; }
+  @media(max-width:749px) {
+    #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__grid { grid-template-columns:1fr; }
+    #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__image { aspect-ratio:4 / 5; }
+    #TejestaSplitSignup-{{ section.id }} .tejesta-split-signup__content { padding:5rem 2.4rem; }
+  }
+{%- endstyle -%}
+<section id="TejestaSplitSignup-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient" aria-labelledby="TejestaSignupHeading-{{ section.id }}">
+  <div class="tejesta-split-signup__grid">
+    <div>
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '375, 550, 750, 1100, 1600', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', class: 'tejesta-split-signup__image' }}
+      {% else %}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'tejesta-split-signup__image' }}
+      {% endif %}
+    </div>
+    <div class="tejesta-split-signup__content">
+      <h2 id="TejestaSignupHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.text != blank %}<div class="tejesta-split-signup__copy rte">{{ section.settings.text }}</div>{% endif %}
+      {% form 'customer', id: form_id, data-shopify-captcha: 'true' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {% if form.posted_successfully? %}
+          <p class="tejesta-split-signup__message" id="{{ form_id }}-success" role="status" tabindex="-1" autofocus>Thank you</p>
+        {% else %}
+          <div class="tejesta-split-signup__field">
+            <label class="visually-hidden" for="{{ form_id }}-email">Email address</label>
+            <input id="{{ form_id }}-email" type="email" name="contact[email]" value="{{ form.email | escape }}" placeholder="Email address" autocomplete="email" autocorrect="off" autocapitalize="off" required {% if form.errors %}aria-invalid="true" aria-describedby="{{ form_id }}-error" autofocus{% endif %}>
+            <button type="submit" name="commit" aria-label="Subscribe"><span aria-hidden="true">→</span></button>
+          </div>
+        {% endif %}
+        {% if form.errors %}<div id="{{ form_id }}-error" class="tejesta-split-signup__message" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name":"TEJESTA split signup",
+  "settings":[
+    {"type":"paragraph","content":"Provisional image and copy for layout review. Replace with Jon's final campaign assets and text when supplied."},
+    {"type":"image_picker","id":"image","label":"Editorial image"},
+    {"type":"text","id":"heading","label":"Heading","default":"Stay Connected"},
+    {"type":"richtext","id":"text","label":"Supporting copy"},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "presets":[{"name":"TEJESTA split signup"}]
+}
+{% endschema %}
