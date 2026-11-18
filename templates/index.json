@@ -388,6 +388,18 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "split_optical_editorial": {
+      "type": "tejesta-split-editorial",
+      "settings": {
+        "heading": "Optical Collection",
+        "text": "<p>Made with the same intention, now in service of clarity.</p>",
+        "button_label": "Shop Optical",
+        "button_link": "/collections/all?type=optical",
+        "image": "shopify://shop_images/OPTICAL_COLLECTION_PHOTO.webp",
+        "image_position": "left",
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
@@ -398,6 +410,7 @@
     "split_signup",
     "tejesta_line_divider_after_optical",
     "split_sun_editorial",
+    "split_optical_editorial",
     "image_banner_VtR9UH",
     "image_banner_gdWexg",
     "image_banner_YtLCfF",

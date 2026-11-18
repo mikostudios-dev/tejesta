@@ -7,6 +7,9 @@
   #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__copy p { margin:0; }
   #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__button { margin-top:3rem; --tejesta-frame-button-width:18rem; --tejesta-frame-button-height:4.3rem; --tejesta-frame-button-padding:0 2rem; --tejesta-frame-button-font-size:1.4rem; }
   #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__image { display:block; width:100%; height:100%; object-fit:cover; aspect-ratio:1 / 1.15; }
+  {% if section.settings.image_position == 'left' %}
+    #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__media { order:-1; }
+  {% endif %}
   @media(max-width:749px) {
     #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__grid { grid-template-columns:1fr; }
     #TejestaEditorial-{{ section.id }} .tejesta-split-editorial__media { order:-1; }
@@ -34,11 +37,12 @@
 {
   "name":"TEJESTA split editorial",
   "settings":[
-    {"type":"paragraph","content":"Provisional campaign image and reference copy. Jon's red design note asks for new Sun text; replace when final copy arrives."},
+    {"type":"paragraph","content":"Provisional campaign image and reference copy. Jon's red design notes ask for new campaign text; replace when final copy arrives."},
     {"type":"text","id":"heading","label":"Heading","default":"Sun Collection"},
     {"type":"richtext","id":"text","label":"Text","default":"<p>Frames shaped for light, considered in every detail.</p>"},
     {"type":"text","id":"button_label","label":"Button text","default":"Shop Sunglasses"},
     {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"select","id":"image_position","label":"Image position on desktop","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}],"default":"right"},
     {"type":"image_picker","id":"image","label":"Editorial image"},
     {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
   ],
