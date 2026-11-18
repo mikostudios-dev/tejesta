@@ -369,3 +369,63 @@ details[open] > .header__icon--menu .icon-close {
 .header-wrapper--homepage-overlay details[open] > .header__icon--menu .icon-close {
   color: #121212;
 }
+
+/* Jon's November menu reference. Keep shared footer and navigation data intact. */
+.menu-drawer--jon {
+  width: min(100vw, 37.1rem);
+  background: #fefcfb;
+}
+.menu-drawer--jon .menu-drawer__navigation-container {
+  display: block;
+}
+header-drawer .menu-drawer--jon .menu-drawer__navigation {
+  padding: calc(var(--header-height, 7.6rem) + 3rem) 0 0;
+}
+.menu-drawer--jon .menu-drawer__menu-item {
+  font-family: 'TEJESTA Jost', var(--font-body-family);
+  font-size: 2rem;
+  line-height: 1.5;
+  padding: .55rem 2.85rem;
+}
+.menu-drawer--jon .menu-drawer__emblem {
+  display: block;
+  width: calc(100% - 6.2rem);
+  height: auto;
+  margin: 2.2rem auto 2rem;
+  pointer-events: none;
+  user-select: none;
+}
+.menu-drawer--jon .menu-drawer__subscribe {
+  padding: 0 2.85rem 3rem;
+}
+.menu-drawer--jon .menu-drawer__subscribe-divider {
+  display: grid;
+  gap: .45rem;
+  margin: 0 0 3rem;
+}
+.menu-drawer--jon .menu-drawer__subscribe-divider span {
+  display: block;
+  height: 1px;
+  background: #121212;
+}
+.menu-drawer--jon .menu-drawer__subscribe-heading {
+  font-family: 'TEJESTA Louize Display', Georgia, serif;
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1.7rem;
+}
+.menu-drawer--jon .menu-drawer__subscribe-field {
+  min-height: 4.5rem;
+  padding: 0 1.5rem;
+}
+.menu-drawer--jon .menu-drawer__subscribe-input,
+.menu-drawer--jon .menu-drawer__subscribe-submit {
+  font-size: 1.8rem;
+}
+.menu-drawer--jon .menu-drawer__subscribe-nav {
+  margin-top: 3.5rem;
+  gap: .6rem;
+}
+.menu-drawer--jon .menu-drawer__subscribe-nav a {
+  font-size: 1.6rem;
+}

@@ -16,7 +16,7 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
-    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+    <div id="menu-drawer" class="gradient menu-drawer menu-drawer--jon motion-reduce color-{{ section.settings.menu_color_scheme }}">
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
@@ -134,6 +134,7 @@
                 </li>
               {%- endfor -%}
             </ul>
+            <img class="menu-drawer__emblem" src="{{ 'tejesta-menu-emblem.svg' | asset_url }}" width="618" height="618" alt="" aria-hidden="true" loading="eager">
           </nav>
           <div class="menu-drawer__utility-links">
             {%- if localization.available_countries or localization.available_languages -%}
@@ -258,14 +259,7 @@
               {%- endif -%}
             </ul>
             <div class="menu-drawer__subscribe">
-              <img
-                class="menu-drawer__subscribe-divider"
-                src="{{ 'tejesta-line-art-divider.svg' | asset_url }}"
-                width="1288"
-                height="20"
-                loading="lazy"
-                alt=""
-              >
+              <div class="menu-drawer__subscribe-divider" aria-hidden="true"><span></span><span></span><span></span></div>
 
               <h2 class="menu-drawer__subscribe-heading">Stay Connected</h2>
               {%- form 'customer', id: 'ContactDrawer', class: 'menu-drawer__subscribe-form' -%}
