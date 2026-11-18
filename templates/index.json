@@ -152,11 +152,33 @@
     "split_sun_editorial": {
       "type": "tejesta-split-editorial",
       "settings": {
-        "heading": "SUN",
+        "heading": "Sun",
         "text": "<p>Frames shaped for light, considered in every detail.</p>",
         "button_label": "Shop Sunglasses",
         "button_link": "/collections/all?type=sunglasses",
+        "image_position": "right",
         "image": "shopify://shop_images/TEJESTA_VAQUERO_BANNER_HOME_PAGE.webp",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "tejesta_line_divider_after_artesania": {
+      "type": "tejesta-line-art-divider",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "divider_width": 90,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "split_optical_editorial": {
+      "type": "tejesta-split-editorial",
+      "settings": {
+        "heading": "Optical",
+        "text": "<p>Made with the same intention, now in service of clarity.</p>",
+        "button_label": "Shop Optical",
+        "button_link": "/collections/all?type=optical",
+        "image_position": "left",
+        "image": "shopify://shop_images/OPTICAL_COLLECTION_PHOTO.webp",
         "color_scheme": "scheme-1"
       }
     },
@@ -317,16 +339,6 @@
         "show_text_below": true
       }
     },
-    "tejesta_line_divider_after_artesania": {
-      "type": "tejesta-line-art-divider",
-      "disabled": true,
-      "settings": {
-        "color_scheme": "scheme-1",
-        "divider_width": 90,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
     "image_banner_yzfUUK": {
       "type": "image-banner",
       "blocks": {
@@ -388,18 +400,6 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
-    },
-    "split_optical_editorial": {
-      "type": "tejesta-split-editorial",
-      "settings": {
-        "heading": "Optical Collection",
-        "text": "<p>Made with the same intention, now in service of clarity.</p>",
-        "button_label": "Shop Optical",
-        "button_link": "/collections/all?type=optical",
-        "image": "shopify://shop_images/OPTICAL_COLLECTION_PHOTO.webp",
-        "image_position": "left",
-        "color_scheme": "scheme-1"
-      }
     }
   },
   "order": [
@@ -410,11 +410,11 @@
     "split_signup",
     "tejesta_line_divider_after_optical",
     "split_sun_editorial",
+    "tejesta_line_divider_after_artesania",
     "split_optical_editorial",
     "image_banner_VtR9UH",
     "image_banner_gdWexg",
     "image_banner_YtLCfF",
-    "tejesta_line_divider_after_artesania",
     "image_banner_yzfUUK",
     "tejesta_line_art_divider_CtbWyb"
   ]
