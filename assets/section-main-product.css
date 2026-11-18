@@ -1718,7 +1718,8 @@ a.product__text {
     scrollbar-width: thin;
     scrollbar-gutter: stable;
     scroll-padding-block: 1rem;
-    padding: 0.4rem;
+    /* Overlay scrollbars do not reserve a gutter on macOS: keep content clear. */
+    padding: 0.4rem 2.4rem 0.4rem 0.4rem;
   }
 
   .product--tejesta-pdp .product__column-sticky:focus-visible {
