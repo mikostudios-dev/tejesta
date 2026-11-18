@@ -106,7 +106,6 @@
     },
     "tejesta_line_divider_after_sun": {
       "type": "tejesta-line-art-divider",
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "divider_width": 90,
@@ -181,6 +180,7 @@
       "blocks": {
         "heading_XKEUBU": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "Artesanía",
             "heading_logo_asset": "artesania",
@@ -211,7 +211,6 @@
         "text_RX9633",
         "buttons_xgtAe4"
       ],
-      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/ARTESANIA_COLLECTION_PHOTO.webp",

@@ -57,6 +57,15 @@
             "content": "<p>Please use the microfiber cloth provided by Tejesta to wipe your lenses to keep them dust, oil, and fingerprint free. Try not to use your shirt or any other potentially abrasive material to clean your lenses as there is a possibility they will scratch. We highly recommend rinsing your glasses in fresh water if you plan on wearing them to the beach, as the salty air can damage your frames. Don't leave them in the direct sunlight (for instance on your car’s dash) as slight warping can occur.</p>",
             "page": ""
           }
+        },
+        "collapsible_tab_DYCqrd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "icon": "check_mark",
+            "content": "",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -67,7 +76,8 @@
         "buy_buttons",
         "description",
         "details_tab",
-        "care_tab"
+        "care_tab",
+        "collapsible_tab_DYCqrd"
       ],
       "settings": {
         "enable_sticky_info": true,
