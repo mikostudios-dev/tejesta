@@ -408,6 +408,15 @@
         "mobile_content_alignment": "center",
         "show_text_below": true
       }
+    },
+    "our_story_intro": {
+      "type": "tejesta-story-intro",
+      "settings": {
+        "text": "<p>Tejesta is a design-centered eyewear brand based in Miami, FL, inspired by a diverse range of influences and driven by a vision to create collectible, wearable art. Our spectacles are crafted for those who seek distinction and quality, embodying the rugged spirit of the American West and the elegance of Art Deco.</p>",
+        "link_label": "Read More",
+        "link": "/pages/journey",
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
@@ -421,6 +430,7 @@
     "tejesta_line_divider_after_artesania",
     "split_optical_editorial",
     "tejesta_line_art_divider_CtbWyb",
+    "our_story_intro",
     "tejesta_line_art_divider_JtHhEf",
     "image_banner_VtR9UH",
     "image_banner_gdWexg",

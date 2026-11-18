@@ -1,0 +1,29 @@
+{%- style -%}
+  #TejestaStory-{{ section.id }} { text-align:center; padding:3.2rem 2.4rem; color:rgb(var(--color-foreground)); background:rgb(var(--color-background)); }
+  #TejestaStory-{{ section.id }} .tejesta-story-intro__inner { max-width:88rem; margin:0 auto; }
+  #TejestaStory-{{ section.id }} .tejesta-story-intro__text { font-size:1.5rem; line-height:1.6; }
+  #TejestaStory-{{ section.id }} .tejesta-story-intro__text p { margin:0; }
+  #TejestaStory-{{ section.id }} .tejesta-story-intro__link { display:inline-flex; align-items:center; min-height:44px; margin-top:2rem; color:inherit; font-size:1.5rem; text-decoration:none; }
+  #TejestaStory-{{ section.id }} .tejesta-story-intro__link:hover { text-decoration:underline; text-underline-offset:0.4rem; }
+  #TejestaStory-{{ section.id }} .tejesta-story-intro__link:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+  @media(max-width:749px) { #TejestaStory-{{ section.id }} { padding:2.4rem; } }
+{%- endstyle -%}
+<section id="TejestaStory-{{ section.id }}" class="color-{{ section.settings.color_scheme }}" aria-label="Our Story">
+  <div class="tejesta-story-intro__inner">
+    {% if section.settings.text != blank %}<div class="tejesta-story-intro__text rte">{{ section.settings.text }}</div>{% endif %}
+    {% if section.settings.link_label != blank and section.settings.link != blank %}<a class="tejesta-story-intro__link" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>{% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name":"TEJESTA Our Story intro",
+  "settings":[
+    {"type":"paragraph","content":"Provisional copy from TEJESTA's existing Our Story page. Replace when Jon supplies final homepage copy. The design reference contains another brand's text and is for layout only."},
+    {"type":"richtext","id":"text","label":"Story text"},
+    {"type":"text","id":"link_label","label":"Link text","default":"Read More"},
+    {"type":"url","id":"link","label":"Story page"},
+    {"type":"color_scheme","id":"color_scheme","label":"Color scheme","default":"scheme-1"}
+  ],
+  "presets":[{"name":"TEJESTA Our Story intro"}]
+}
+{% endschema %}
