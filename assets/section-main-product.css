@@ -1592,20 +1592,37 @@ a.product__text {
   margin: 0;
 }
 
-/* Invert only the available Add to cart control, including keyboard focus. */
+/* Fill the inner frame using the same nine-slice geometry as its outline. */
+.product--tejesta-pdp .product-form__submit.button--tejesta-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  box-sizing: border-box;
+  border: 12px solid transparent;
+  border-image: url('tejesta-control-fill.svg') 12 fill / 12px / 0 stretch;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .product--tejesta-pdp .product-form__submit.button--tejesta-frame:not(:disabled):not([aria-disabled='true']):focus-visible {
-  background-color: #000;
+  background-color: transparent;
   color: #fff;
-  --tejesta-frame-button-image: var(--tejesta-frame-button-image-light);
   outline: 2px solid #000;
   outline-offset: 4px;
 }
 
+.product--tejesta-pdp .product-form__submit.button--tejesta-frame:not(:disabled):not([aria-disabled='true']):focus-visible::after {
+  opacity: 1;
+}
+
 @media (hover: hover) {
   .product--tejesta-pdp .product-form__submit.button--tejesta-frame:not(:disabled):not([aria-disabled='true']):hover {
-    background-color: #000;
+    background-color: transparent;
     color: #fff;
-    --tejesta-frame-button-image: var(--tejesta-frame-button-image-light);
+  }
+  .product--tejesta-pdp .product-form__submit.button--tejesta-frame:not(:disabled):not([aria-disabled='true']):hover::after {
+    opacity: 1;
   }
 }
 
