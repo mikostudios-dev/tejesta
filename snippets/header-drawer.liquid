@@ -262,7 +262,7 @@
               <div class="menu-drawer__subscribe-divider" aria-hidden="true"><span></span><span></span><span></span></div>
 
               <h2 class="menu-drawer__subscribe-heading">Stay Connected</h2>
-              {%- form 'customer', id: 'ContactDrawer', class: 'menu-drawer__subscribe-form' -%}
+              {%- form 'customer', id: 'ContactDrawer', class: 'menu-drawer__subscribe-form', data-shopify-captcha: 'true' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <div class="menu-drawer__subscribe-field">
                   <label class="visually-hidden" for="NewsletterDrawer--{{ section.id }}">
