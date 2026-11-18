@@ -702,8 +702,13 @@
   }
 
   .tejesta-footer__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: max-content minmax(0, 1fr);
     gap: 2.6rem 2.2rem;
+  }
+
+  .tejesta-footer__nav .tejesta-footer__heading {
+    font-size: clamp(1.9rem, 6vw, 2.4rem);
+    white-space: nowrap;
   }
 
   .tejesta-footer__newsletter {
