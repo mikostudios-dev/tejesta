@@ -131,15 +131,6 @@
         "padding_bottom": 48
       }
     },
-    "our_story_intro": {
-      "type": "tejesta-story-intro",
-      "settings": {
-        "text": "<p>Tejesta is a design-centered eyewear brand based in Miami, FL, inspired by a diverse range of influences and driven by a vision to create collectible, wearable art. Our spectacles are crafted for those who seek distinction and quality, embodying the rugged spirit of the American West and the elegance of Art Deco.</p>",
-        "link_label": "Read More",
-        "link": "/pages/journey",
-        "color_scheme": "scheme-1"
-      }
-    },
     "image_banner_YtLCfF": {
       "type": "image-banner",
       "blocks": {
@@ -192,6 +183,75 @@
         "show_text_below": true
       }
     },
+    "tejesta_line_art_divider_JgLdAJ": {
+      "type": "tejesta-line-art-divider",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "divider_width": 90,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "image_banner_yzfUUK": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_wmYpfV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Artesanía",
+            "heading_logo_asset": "vaquero",
+            "heading_size": "h0"
+          }
+        },
+        "text_3dLHQr": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "buttons_BJ4dR8": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop Now",
+            "button_link_1": "https://tejesta2026.myshopify.com/collections/all?collection=vaquero",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_wmYpfV",
+        "text_3dLHQr",
+        "buttons_BJ4dR8"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/TEJESTA_VAQUERO_BANNER_HOME_PAGE.webp",
+        "section_width": "full_width",
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-1",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "tejesta_line_art_divider_JtHhEf": {
+      "type": "tejesta-line-art-divider",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "divider_width": 90,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "split_signup": {
       "type": "tejesta-split-newsletter",
       "settings": {
@@ -202,15 +262,6 @@
       }
     },
     "tejesta_line_divider_after_optical": {
-      "type": "tejesta-line-art-divider",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "divider_width": 90,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
-    "tejesta_line_art_divider_JgLdAJ": {
       "type": "tejesta-line-art-divider",
       "settings": {
         "color_scheme": "scheme-1",
@@ -261,7 +312,7 @@
         "padding_bottom": 48
       }
     },
-    "tejesta_line_art_divider_JtHhEf": {
+    "tejesta_line_art_divider_cMnqGM": {
       "type": "tejesta-line-art-divider",
       "settings": {
         "color_scheme": "scheme-1",
@@ -374,55 +425,13 @@
         "show_text_below": true
       }
     },
-    "image_banner_yzfUUK": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_wmYpfV": {
-          "type": "heading",
-          "settings": {
-            "heading": "Artesanía",
-            "heading_logo_asset": "vaquero",
-            "heading_size": "h0"
-          }
-        },
-        "text_3dLHQr": {
-          "type": "text",
-          "settings": {
-            "text": "",
-            "text_style": "body"
-          }
-        },
-        "buttons_BJ4dR8": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Now",
-            "button_link_1": "https://tejesta2026.myshopify.com/collections/all?collection=vaquero",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_wmYpfV",
-        "text_3dLHQr",
-        "buttons_BJ4dR8"
-      ],
-      "name": "t:sections.image-banner.presets.name",
+    "our_story_intro": {
+      "type": "tejesta-story-intro",
       "settings": {
-        "image": "shopify://shop_images/TEJESTA_VAQUERO_BANNER_HOME_PAGE.webp",
-        "section_width": "full_width",
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-left",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-1",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
+        "text": "<p>Tejesta is a design-centered eyewear brand based in Miami, FL, inspired by a diverse range of influences and driven by a vision to create collectible, wearable art. Our spectacles are crafted for those who seek distinction and quality, embodying the rugged spirit of the American West and the elegance of Art Deco.</p>",
+        "link_label": "Read More",
+        "link": "/pages/journey",
+        "color_scheme": "scheme-1"
       }
     }
   },
@@ -443,6 +452,7 @@
     "tejesta_line_art_divider_CtbWyb",
     "image_banner_VtR9UH",
     "image_banner_gdWexg",
-    "our_story_intro"
+    "our_story_intro",
+    "tejesta_line_art_divider_cMnqGM"
   ]
 }
